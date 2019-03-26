@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Find Your Recipe</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Roboto:400,500,700,900" rel="stylesheet">
+    <!--css file -->
+    <link type="text/css" rel="stylesheet" href="assets/css/recipe-style.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <header>
+        <!-- <img src="assets/images/healthy-meal-prep-ideas-meal-prep-pasta-700-350.jpg" alt="healthy meals"> -->
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="section">
+                        <div id="header" class="section center-align">
+                            <h3 id="onImage" class="headers">Congratulations, <br> You're<span id="extraText"
+                                    class="lime-text accent-2"> Eating In!</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 center-align">
+                        <h5 id="subHeaders" class="center-align">So... You're Eating-In?</h5>
+                        <p class="grey-text text-darken-2 center-align">
+                            Enter you preferences by filling out the form below. <br>Feeling adventurous, leave it blank
+                            and we'll select your meal for you. Enjoy!
+                        </p>
+                        <br>
+                        <a href="#" class="btn-floating btn-large lime"><i class="material-icons left">arrow_downward</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="container">
+        <div class="row">
+            <div id="ingredInput" class="input-field col s12">
+                <input id="ingredients" type="text" class="validate">
+                <label for="ingredients">Enter Preferred Ingredients</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label>Select your preferred Cook time</label>
+            <select class="browser-default">
+                <option value="" disabled selected>Cook time options</option>
+                <option value="1">15</option>
+                <option value="2">20</option>
+                <option value="2">25</option>
+                <option value="3">30</option>
+                <option value="2">35</option>
+                <option value="3">40</option>
+                <option value="2">45</option>
+                <option value="3">50</option>
+                <option value="2">55</option>
+                <option value="3">60</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label>Select your dietary preference</label>
+            <select class="browser-default multiple">
+                <option value="" disabled selected>Dietary options</option>
+                <option value="1">Balanced</option>
+                <option value="2">High-fiber</option>
+                <option value="2">High-protein</option>
+                <option value="3">Low-carb</option>
+                <option value="2">Low-fat</option>
+                <option value="3">Low-sodium</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label>Select Health Labels</label>
+            <select class="browser-default">
+                <option value="" disabled selected>Health Label options</option>
+                <option value="1">Crustacean-free</option>
+                <option value="2">Gluten-free</option>
+                <option value="2">Koshere</option>
+                <option value="3">Peanut-free</option>
+                <option value="2">Vegetarian</option>
+                <option value="3">Soy-free</option>
+            </select>
+        </div>
+
+        <!-- btn -->
+        <div class="row center-align">
+            <div class="s6">
+                <button id="subBtn" class="btn btn-large lime waves-effect waves-light">submit</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+
+</html>

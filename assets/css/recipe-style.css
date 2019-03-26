@@ -1,0 +1,37 @@
+header{
+    background-image: url(../images/HeroImh_1500x500-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+#onImage{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+}
+#extraText {
+    font-family: 'Caveat Brush', cursive;
+    font-size: 70px;
+
+}
+
+#subHeaders {
+    padding-top: 25px;
+    font-family: 'Caveat Brush', cursive;
+    font-size: 45px;
+}
+#subBtn {
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-top: 20px;
+
+}
+#ingredInput{
+    padding-left: 2px;
+    padding-right: 2px;
+
+}
