@@ -14,6 +14,9 @@ let addressLat;
 let addressLng;
 let restaurantId;
 let restaurantSearchLimit = 5;
+let map;
+let locations = [];
+
 
 // Seed Data
 
@@ -64,18 +67,70 @@ const restaurantList = (lat, lng) => {
     restResponse.forEach((rest) => {
       let restId = rest.id;
       let restName = rest.name;
-      let restAddress = rest.location.display_address;
+      let restAddressArray = rest.location.display_address;
+      let restAddress = restAddressArray.join(',')
       let restPhoneNumber = rest.phone;
       let restRating = rest.rating;
       let restPrice = rest.price;
       let restLat = rest.coordinates.latitude;
       let restLng = rest.coordinates.longitude;
 
-
       // Log return values 
-      console.log(restId, restName, restAddress, restPhoneNumber, restRating, restPrice, restLat, restLng)
+      console.log(restId, restName, restAddress, restPhoneNumber, restRating, restPrice, restLat, restLng);
+      // Push restaurant data to locations array to build map markers
+      locations.push([restName, restLat, restLng])
     })
+    console.log(typeof addressLat)
+    console.log(typeof addressLng)
 
-
+    console.log(locations)
   })
+  // Invoke initMap()
+  setTimeout(function () {
+    initialize();
+  }, 3000);
+};
+
+// Initialize Google initMap function
+const initialize = () => {
+  console.log('initilize function called')
+  initMap();
 }
+
+// Google map function - to display resturants on map
+function initMap() {
+  console.log('initMap function')
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: addressLat,
+      lng: addressLng
+    },
+    zoom: 15
+  });
+  console.log('google maps first part complete')
+  // Create Google Maps Info Window to display restarant markers
+  let infowindow = new google.maps.InfoWindow({});
+  let marker, i;
+
+  // Loop through locations array
+  for (i = 0; i < locations.length; i++) {
+    console.log('google marker for loop')
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map,
+      title: locations[i][0],
+      animation: google.maps.Animation.DROP
+    });
+    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      console.log('google maps addListern click event')
+      return function () {
+        infowindow.setContent(locations[i][0]);
+        infowindow.open(map, marker)
+      }
+    })(marker, i))
+  }
+};
+
+
+
+
