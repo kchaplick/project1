@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Find A Restaurant</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Roboto:400,500,700,900" rel="stylesheet">
+    <!--css file -->
+    <link type="text/css" rel="stylesheet" href="assets/css/restaurant-style.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <header>
+        <!-- <img src="assets/images/healthy-meal-prep-ideas-meal-prep-pasta-700-350.jpg" alt="healthy meals"> -->
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="section">
+                        <div id="header" class="section center-align">
+                            <h3 id="onImage" class="headers white-text">Congratulations, <br> You're<span id="extraText"
+                                    class="lime-text accent-2"> Eating Out!</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 center-align">
+                        <h5 id="subHeaders" class="center-align">So... You're Eating-Out?</h5>
+                        <p class="grey-text text-darken-2 center-align">
+                            Enter your preferences by filling out the form below. <br>Feeling adventurous, leave it
+                            blank
+                            and we'll select a restaurant for you. Enjoy!
+                        </p>
+                        <br>
+                        <a href="#" class="btn-floating btn-large lime"><i
+                                class="material-icons left">arrow_downward</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="container">
+        <div class="row">
+            <div id="ingredInput" class="input-field col s12">
+                <input id="zipcode" type="number" class="validate">
+                <label for="zipcode">Enter Your Zipcode</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label id="distance">Select your preferred distance</label>
+            <select id="distanceSelect" class="browser-default">
+                <option value="0" disabled selected>Distance</option>
+                <option value="2">1</option>
+                <option value="2">5</option>
+                <option value="2">10</option>
+                <option value="1">15</option>
+                <option value="2">20</option>
+                <option value="2">25</option>
+
+            </select>
+        </div>
+
+        <div class="row">
+            <label id="price">Select your Price-range</label>
+            <select id="priceSelect" class="browser-default multiple">
+                <option value="0" disabled selected>Price-range</option>
+                <option value="1">$</option>
+                <option value="2">$$</option>
+                <option value="2">$$$</option>
+                <option value="3">$$$$</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div id="ingredInput" class="input-field col s12">
+                <input id="cuisine" type="text" class="validate">
+                <label for="cuisine">Enter Preferred Cuisine</label>
+            </div>
+        </div>
+
+        <!-- btn -->
+        <div class="row center-align">
+            <div class="s6">
+                <button id="subBtn" class="btn btn-large lime waves-effect waves-light">submit</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+
+</html>
