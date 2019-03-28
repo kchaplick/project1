@@ -93,20 +93,12 @@ const restaurantList = (lat, lng) => {
       console.log(restId, restName, restAddress, restPhoneNumber, restRating, restPrice, restLat, restLng);
       // Push restaurant data to locations array to build map markers
       locations.push([restName, restLat, restLng])
+
     })
     console.log(locations)
+    initMap();
   })
-  // Invoke initMap()
-  setTimeout(function () {
-    initialize();
-  }, 3000);
 };
-
-// Initialize Google initMap function
-const initialize = () => {
-  console.log('initilize function called')
-  initMap();
-}
 
 // Google map function - to display resturants on map
 function initMap() {
