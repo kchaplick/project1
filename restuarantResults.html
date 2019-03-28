@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Restaurant Results</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Roboto:400,500,700,900" rel="stylesheet">
+    <!--css file -->
+    <link type="text/css" rel="stylesheet" href="assets/css/restaurant-style.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/restResults-style.css" />
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 center-align">
+                        <h5 id="subHeaders" class="center-align">Here's Your Results</h5>
+                        <p class="grey-text text-darken-2 center-align">
+                            Scroll below to see the top 5 results based on your preferences. Enjoy!
+                        </p>
+                        <br>
+                        <a href="#" class="btn-floating btn-large lime"><i
+                                class="material-icons left">fastfood</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3 id="restaurantName">Restaurant Name</h3>
+                <ul id="resultsList">
+                    <li>Website: <span id="resultsWebsite"><a href="#">www.here.com</a></span></li>
+                    <li>Number: <span id="resultsNumber"><a href="tel:+311-555-2368">311-555-2368</a></span> </li> 
+                    <li>Address: <span id="resultsAddress">400 May Road, Philadelphia, PA 19142</span></li>
+                    <li>Ratings: <span id="resultsRating">4</span></li>
+                </ul>
+                <br>
+                <hr>
+            </div>
+        </div>
+        
+    <!-- btn -->
+    <div class="container">
+    <div class="row center-align">
+        <div class="s6">
+            <button id="subBtn" class="btn btn-large lime waves-effect waves-light">Load More</button>
+            <button id="subBtn" class="btn btn-large lime darken-2 waves-effect waves-light">Run Again</button>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+
+</html>

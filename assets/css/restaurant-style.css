@@ -1,14 +1,20 @@
-header {
-  background-image: url(../images/ResHero_1500x500-1.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* opacity: 0.5; */
-  background-position: center;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 100%;
-  padding-top: 25px;
-  padding-bottom: 25px;
+
+header{
+    background-image: url(../images/Eat-Out_1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* opacity: 0.5; */
+    background-position: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+#onImage{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+
 }
 
 #onImage {
