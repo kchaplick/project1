@@ -144,8 +144,8 @@ function initMap() {
     })(marker, i))
     // Get lat & lng coordinate - use extend to add coordinates to the bounds property
     console.log('FitBounds', marker.position.lat(), marker.position.lng());
-    loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-    bounds.extend(loc);
+    // loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+    bounds.extend(marker.position);
   }
   console.log('bounds', bounds)
   // Google maps zoom based on markers
