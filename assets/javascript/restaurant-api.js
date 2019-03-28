@@ -117,27 +117,39 @@ function initMap() {
   let markers = [];
   let i;
 
-  // Clear out the old markers.
+  // Create map viewpoint property
+  let loc;
+  let bounds = new google.maps.LatLngBounds();
+
+  // Clear out the old markers
   markers.forEach(function (marker) {
     marker.setMap(null);
   });
 
   // Loop through locations array - add markers to map
   for (i = 0; i < locations.length; i++) {
-    console.log('google marker for loop')
+    console.log('google marker for-loop')
     marker = new google.maps.Marker({
       position: new google.maps.LatLng(locations[i][1], locations[i][2]),
       map: map,
       title: locations[i][0],
       animation: google.maps.Animation.DROP
     });
+
     google.maps.event.addListener(marker, 'click', (function (marker, i) {
       return function () {
         infowindow.setContent(locations[i][0]);
         infowindow.open(map, marker)
       }
     })(marker, i))
+    // Get lat & lng coordinate - use extend to add coordinates to the bounds property
+    console.log('FitBounds', marker.position.lat(), marker.position.lng());
+    loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+    bounds.extend(loc);
   }
+  console.log('bounds', bounds)
+  // Google maps zoom based on markers
+  map.fitBounds(bounds)
 };
 
 
