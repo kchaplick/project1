@@ -7,6 +7,9 @@
 
     <title>Find A Restaurant</title>
 
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import Google Fonts-->
@@ -49,7 +52,9 @@
                         </p>
                         <br>
                         <a href="#" class="btn-floating btn-large lime"><i
+
                                 class="material-icons left">fastfood</i></a>
+
                     </div>
                 </div>
             </div>
@@ -59,6 +64,7 @@
     <div class="container">
         <div class="row">
             <div id="ingredInput" class="input-field col s12">
+
                 <input id="address" type="text" class="validate">
                 <label for="address">Enter Your Address</label>
             </div>
@@ -67,6 +73,7 @@
         <!-- <div class="row">
             <label id="distance">Select your preferred distance</label>
             <select id="distanceSelect" class="browser-default">
+
                 <option value="0" disabled selected>Distance</option>
                 <option value="2">1</option>
                 <option value="2">5</option>
@@ -76,6 +83,7 @@
                 <option value="2">25</option>
 
             </select>
+
         </div> -->
 
         <div class="row">
@@ -91,7 +99,9 @@
 
         <div class="row">
             <div id="ingredInput" class="input-field col s12">
+
                 <input id="cuisine" type="text" class="validate">
+
                 <label for="cuisine">Enter Preferred Cuisine</label>
             </div>
         </div>
@@ -99,15 +109,28 @@
         <!-- btn -->
         <div class="row center-align">
             <div class="s6">
+
                 <button id="subBtn" class="btn btn-large lime waves-effect waves-light">submit</button>
+
             </div>
         </div>
 
     </div>
 
+
+    <!-- Map Container -->
+
+    <div id="map"></div>
+
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Google Maps API -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVMGjEp68AE6Hl1NzaVsVyMoP9R-HE8kI"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <script type="text/javascript" src="assets/javascript/restaurant-api.js"></script>
 </body>
 
 </html>
+

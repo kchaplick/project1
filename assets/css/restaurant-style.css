@@ -1,3 +1,4 @@
+
 header{
     background-image: url(../images/Eat-Out_1.jpg);
     background-repeat: no-repeat;
@@ -13,29 +14,47 @@ header{
 #onImage{
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
+
 }
+
+#onImage {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+}
+
 #breadcrumbNav {
-    padding-left: 25px;
+  padding-left: 25px;
 }
+
 #extraText {
-    font-family: 'Caveat Brush', cursive;
-    font-size: 70px;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 70px;
 
 }
 
 #subHeaders {
-    padding-top: 25px;
-    font-family: 'Caveat Brush', cursive;
-    font-size: 45px;
+  padding-top: 25px;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 45px;
 }
+
 #subBtn {
-    padding-left: 100px;
-    padding-right: 100px;
-    margin-top: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  margin-top: 20px;
 
 }
-#ingredInput{
-    padding-left: 2px;
-    padding-right: 2px;
 
+#ingredInput {
+  padding-left: 2px;
+  padding-right: 2px;
+
+}
+
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+  height: 400px;
+  width: 750px;
+  margin: auto;
 }
