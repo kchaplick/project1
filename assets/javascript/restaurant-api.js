@@ -8,7 +8,7 @@ let yelpApiKey = 'y_hl6PXci4AHe6XNXNxXwkuPAWbVJaR28iXmlx9rXOQYb4iHKzWhCfCAkvFHzw
 let zipcodeInput;
 let distanceSelect;
 let priceSelect;
-let priceRange;
+let priceRange = '';
 let ingredInput;
 let addressLat;
 let addressLng;
@@ -17,7 +17,14 @@ let restaurantSearchLimit = 5;
 let map;
 let locations = [];
 
-
+// Get price range
+const getPriceRange = (num) => {
+  let text = '';
+  for (let i = 2; i <= num; i++) {
+    text += (',' + i);
+  }
+  priceRange = ('1' + text)
+}
 
 // Seed Data
 
@@ -34,6 +41,8 @@ $("#submit-btn").on("click", function (event) {
   cuisineInput = $("#cuisine-input").val().toLowerCase();
   // Log input results
   console.log('Input values', zipcodeInput, distanceSelect, priceSelect, cuisineInput)
+  // Caluculate price range
+  getPriceRange(priceSelect)
   // Invoke Google ajax function
   zipcodeLatLng(zipcodeInput);
 });
@@ -57,8 +66,9 @@ const zipcodeLatLng = (zipcodeInput) => {
 
 // Yelp ajax call - retrieve restaurant list/data
 const restaurantList = (lat, lng) => {
+  console.log('resturant list price range', priceRange)
   $.ajax({
-    url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${cuisineInput}&latitude=${lat}&longitude=${lng}&sort_by=distance&limit=${restaurantSearchLimit}`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${cuisineInput}&price=${priceRange}&latitude=${lat}&longitude=${lng}&sort_by=distance&limit=${restaurantSearchLimit}`,
     method: "GET",
     headers: {
       Authorization: `Bearer y_hl6PXci4AHe6XNXNxXwkuPAWbVJaR28iXmlx9rXOQYb4iHKzWhCfCAkvFHzwm2s6RXUmYQwYlmk1ZpllOwOZW3Z2co_8HdphrRJ-p3a9eP0qhRBPzAgOCc3NuXXHYx`,
@@ -84,9 +94,6 @@ const restaurantList = (lat, lng) => {
       // Push restaurant data to locations array to build map markers
       locations.push([restName, restLat, restLng])
     })
-    console.log(typeof addressLat)
-    console.log(typeof addressLng)
-
     console.log(locations)
   })
   // Invoke initMap()
@@ -103,7 +110,6 @@ const initialize = () => {
 
 // Google map function - to display resturants on map
 function initMap() {
-  console.log('initMap function')
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: addressLat,
@@ -118,7 +124,6 @@ function initMap() {
   let i;
 
   // Create map viewpoint property
-  let loc;
   let bounds = new google.maps.LatLngBounds();
 
   // Clear out the old markers
@@ -143,12 +148,9 @@ function initMap() {
       }
     })(marker, i))
     // Get lat & lng coordinate - use extend to add coordinates to the bounds property
-    console.log('FitBounds', marker.position.lat(), marker.position.lng());
-    // loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
     bounds.extend(marker.position);
   }
-  console.log('bounds', bounds)
-  // Google maps zoom based on markers
+  // Google maps zoom based on markers lat & lng
   map.fitBounds(bounds)
 };
 
