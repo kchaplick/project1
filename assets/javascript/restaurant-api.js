@@ -18,11 +18,15 @@ let map;
 let locations = [];
 
 
+
 // Seed Data
 
 // on-click event handler - retrieve input values from restaurant.html page
 $("#submit-btn").on("click", function (event) {
   event.preventDefault();
+
+  // Clear locations array
+  locations = [];
 
   zipcodeInput = $("#zipcode-input").val();
   distanceSelect = $("#distance-select").val();
@@ -110,9 +114,15 @@ function initMap() {
   console.log('google maps first part complete')
   // Create Google Maps Info Window to display restarant markers
   let infowindow = new google.maps.InfoWindow({});
-  let marker, i;
+  let markers = [];
+  let i;
 
-  // Loop through locations array
+  // Clear out the old markers.
+  markers.forEach(function (marker) {
+    marker.setMap(null);
+  });
+
+  // Loop through locations array - add markers to map
   for (i = 0; i < locations.length; i++) {
     console.log('google marker for loop')
     marker = new google.maps.Marker({
@@ -122,7 +132,6 @@ function initMap() {
       animation: google.maps.Animation.DROP
     });
     google.maps.event.addListener(marker, 'click', (function (marker, i) {
-      console.log('google maps addListern click event')
       return function () {
         infowindow.setContent(locations[i][0]);
         infowindow.open(map, marker)
