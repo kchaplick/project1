@@ -3,54 +3,87 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Caveat+Brush%7CRoboto:400,500,700,900" rel="stylesheet">
     <!--project css-->
     <link rel="stylesheet" href="assets/css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>MealFlip</title>
 </head>
 
 <body>
-    <div class="container">
-        <!--Logo-->
-        <div id="logo-container" class="row">
-            <h1 class=".center-align">Meal<span class=".flip-horizontal-bottom">Flip</span></h1>
-        </div>
-        <!--directions-->
-        <div id="directions-container" class="row">
-            <div class="col s12 m6">
-                <div id="welcome-container" class="card #f5f5f5 grey lighten-4">
-                    <div class="card-content black-text">
-                        <span class="card-title">Welcome!</span>
-                        <p>Directions text here</p>
+    <div id="main-container" class="container">
+                <!--Logo-->
+                <div id="logo-row" class="row">
+                    <div id="logo-container">
+                        <img id="logo-flip" class="flip-horizontal-bottom lime-text accent-2 " src="assets/images/Logo_MealFlip.png">
+                    </div>
+                </div>
+                <!--directions-->
+                <div id="directions-container" class="row">
+                    <div id="directions-column" class="col s12 m6">
+                        <div id="welcome-container">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <div class="col s12 center-align">
+                                            <h5 id="subHeaders" class="center-align">Are you feeling lucky?</h5>
+                                            <p class="grey-text text-darken-2 center-align">
+                                                Decisions are hard, so leave it up to fate!<br>
+                                                Flip the coin to find out if you should start pulling out the pots and
+                                                pans or dust off your dancing shoes and take on the town.
+
+                                            </p>
+                                            <div id="arrow-row" class="row">
+                                            <i id="arrow" class="material-icons left">arrow_downward</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </main>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--coin-->
+                <div id="coin-container" class="row">
+                    <div id="coin">
+                        <div class="eat-in">
+                            <p class="question-mark">?</p>
+                        </div>
+                        <div class="eat-out">
+                            
+
+                            </div>
                     </div>
 
                 </div>
-            </div>
-        </div>
 
-        <!--coin-->
-        <div id="coin-container" class="row">
+                <!--flip button-->
+                <div id="flip-button-container" class="row">
+                    <a id="flip-button" class="lime waves-effect waves-light btn-large">Flip</a>
+                    
+                </div>
 
-        </div>
-
-        <!--button-->
-        <div id="flip-button-container" class="row">
-            <a id="flip-button" class="waves-effect waves-light btn-large">Flip</a>
-
-        </div>
-
-
-
+                
+          
 
         <!--end main container-->
     </div>
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="assets/javascript/coinflip.js"></script>
 
 </body>
 
