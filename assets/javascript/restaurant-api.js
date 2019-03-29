@@ -5,10 +5,9 @@
 // Global variables
 let yelpID = '8lAJdnJS8IADhxzdY93t9w';
 let yelpApiKey = 'y_hl6PXci4AHe6XNXNxXwkuPAWbVJaR28iXmlx9rXOQYb4iHKzWhCfCAkvFHzwm2s6RXUmYQwYlmk1ZpllOwOZW3Z2co_8HdphrRJ-p3a9eP0qhRBPzAgOCc3NuXXHYx';
-let zipcodeInput;
+let addressInput;
 let distanceSelect;
 let priceSelect;
-let priceRange = '';
 let ingredInput;
 let addressLat;
 let addressLng;
@@ -17,40 +16,39 @@ let restaurantSearchLimit = 5;
 let map;
 let locations = [];
 
-// Get price range
-const getPriceRange = (num) => {
-  let text = '';
-  for (let i = 2; i <= num; i++) {
-    text += (',' + i);
-  }
-  priceRange = ('1' + text)
-}
+// Autocomplete function - invoked in script tag
+function initAutocomplete() {
+  console.log('init autocomplete')
+  autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById('address-input')
+  )
+};
+// Check value of price-select
+let priceCheckInput = (priceSelect === null) ? "1" : priceSelect;
 
+// Setup autocomplete
 // Seed Data
 
 // on-click event handler - retrieve input values from restaurant.html page
-$("#submit-btn").on("click", function (event) {
+$("#sub-btn").on("click", function (event) {
   event.preventDefault();
 
   // Clear locations array
   locations = [];
-
-  zipcodeInput = $("#zipcode-input").val();
-  distanceSelect = $("#distance-select").val();
+  addressInput = $("#address-input").val();
   priceSelect = $("#price-select").val();
-  cuisineInput = $("#cuisine-input").val().toLowerCase();
+  cuisineInput = $("#cuisine-input").val()//.toLowerCase();
   // Log input results
-  console.log('Input values', zipcodeInput, distanceSelect, priceSelect, cuisineInput)
+  console.log('Input values', addressInput, distanceSelect, priceSelect, cuisineInput)
   // Caluculate price range
-  getPriceRange(priceSelect)
   // Invoke Google ajax function
-  zipcodeLatLng(zipcodeInput);
+  zipcodeLatLng(addressInput);
 });
 
 // Google ajax call - convert zipcode to lat & lng
-const zipcodeLatLng = (zipcodeInput) => {
+const zipcodeLatLng = (addressInput) => {
   $.ajax({
-    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcodeInput}&key=AIzaSyAh5sBAW8JKo0Fbeu4JPk_dYvN5aEzPW4c`,
+    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${addressInput}&key=AIzaSyAh5sBAW8JKo0Fbeu4JPk_dYvN5aEzPW4c`,
     method: "GET"
   }).then(function (response) {
     console.log(response)
@@ -66,9 +64,8 @@ const zipcodeLatLng = (zipcodeInput) => {
 
 // Yelp ajax call - retrieve restaurant list/data
 const restaurantList = (lat, lng) => {
-  console.log('resturant list price range', priceRange)
   $.ajax({
-    url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${cuisineInput}&price=${priceRange}&latitude=${lat}&longitude=${lng}&sort_by=distance&limit=${restaurantSearchLimit}`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${cuisineInput}&latitude=${lat}&longitude=${lng}&sort_by=distance&limit=${restaurantSearchLimit}`,
     method: "GET",
     headers: {
       Authorization: `Bearer y_hl6PXci4AHe6XNXNxXwkuPAWbVJaR28iXmlx9rXOQYb4iHKzWhCfCAkvFHzwm2s6RXUmYQwYlmk1ZpllOwOZW3Z2co_8HdphrRJ-p3a9eP0qhRBPzAgOCc3NuXXHYx`,
@@ -86,14 +83,35 @@ const restaurantList = (lat, lng) => {
       let restPhoneNumber = rest.phone;
       let restRating = rest.rating;
       let restPrice = rest.price;
+      let restUrl = rest.url;
       let restLat = rest.coordinates.latitude;
       let restLng = rest.coordinates.longitude;
 
       // Log return values 
-      console.log(restId, restName, restAddress, restPhoneNumber, restRating, restPrice, restLat, restLng);
+      console.log(restId, restName, restAddress, restPhoneNumber, restRating, restPrice, restUrl, restLat, restLng);
       // Push restaurant data to locations array to build map markers
       locations.push([restName, restLat, restLng])
 
+      // Build HTML Tags
+      let restDataDiv = $("<div>");
+      let restNameTag = $("<h3>").text(restName);
+      restNameTag.addClass("restaurant-name");
+      // let ulTag = $("<lu>")
+      let restWebsiteTag = $("<p>").text(`Website: ${restUrl}`)
+      restWebsiteTag.attr("href", `${restUrl}`)
+
+      let restNumberTag = $("<p>").text(`Number: ${restPhoneNumber}`)
+      let restAddressTag = $("<p>").text(`Address: ${restAddress}`)
+      let restRatingTag = $("<p>").text(`Rating: ${restRating}`)
+
+      $(restDataDiv).append(restNameTag)
+      $(restDataDiv).append(restWebsiteTag)
+      $(restDataDiv).append(restNumberTag)
+      $(restDataDiv).append(restAddressTag)
+      $(restDataDiv).append(restRatingTag)
+
+
+      $("#restaurant-list-conatiner").append(restDataDiv);
     })
     console.log(locations)
     initMap();
@@ -145,7 +163,5 @@ function initMap() {
   // Google maps zoom based on markers lat & lng
   map.fitBounds(bounds)
 };
-
-
 
 
