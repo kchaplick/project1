@@ -22,8 +22,8 @@ $("#subBtn").click(function () {
     userIngredient = $("#ingredients").val().trim();
     var userDiet = $("#dietary").val()
     var userHealth = $("#allergy").val()
-    def= "FASAT"
-    defu="393^Gluten-Free"
+    def = "FASAT"
+    defu = "393^Gluten-Free"
     //the search using the form or no
 
     getRecipesUrl = `https://api.yummly.com/v1/api/recipes?_app_id=${apiId}&_app_key=${apiKey}&q=${userIngredient ? userIngredient : randomIngrd}&requirePictures=true&maxTotalTimeInSeconds=${timeInSeconds ? timeInSeconds : 2400}&nutrition.${userDiet ? userDiet : def}.max=20&allowedAllergy[]=${userHealth ? userHealth : defu}&maxResult=5&start=5&sourceRecipeUrl`
@@ -46,34 +46,44 @@ $("#subBtn").click(function () {
                 var calories = 200
                 var recipeImage = recipes[i].smallImageUrls[0]
                 var getRecipeStepsUrl = `https://api.yummly.com/v1/api/recipe/${recipeId}?_app_id=${apiId}&_app_key=${apiKey}`
-                
+
+                  // Build HTML
+                  var recipeContainer = $("<div class='recipeContainer'>");
+                  $("#recipeResults").append(recipeContainer);
+                  var recipeNameTag = $("<h3 class='recName'>").text(recipeName)
+                  recipeContainer.append(recipeNameTag);
+                  var recipeImageDiv = $(`<div class='image'> <img src='${recipeImage}'> </div>`)
+                  recipeContainer.append(recipeImageDiv);
+                  var detailsList = $("<ul class='detailsList'>");
+                  recipeContainer.append(detailsList);
+                  var cookTimeLi = $("<li class='it'>  Cook Time:  <span class='restName cookTime'></span></li>");
+                  cookTimeLi.find(".cookTime").text(time);
+                  detailsList.append(cookTimeLi);
+                  var caloriesLi = $("<li class='it'>  Calories:  <span id='"+recipeId+"' class='restName calories'></span></li>");
+                  caloriesLi.find(".calories").text(calories);
+                  detailsList.append(caloriesLi);
+
                 //gets the recipe steps
                 $.get(getRecipeStepsUrl)
                     .then(function (results) {
                         link = results.source.sourceRecipeUrl
+                        for (var i = 0; i < results.nutritionEstimates.length; i++) {
+                            if (results.nutritionEstimates[i].attribute === "ENERC_KCAL") {
+                               
+                                calories = Math.floor(results.nutritionEstimates[i].value)
+                                console.log(results)
+                                $("#"+results.id).text(calories);
+                            }
+                        }
+                      
                     });
-              // Build HTML
-              var recipeContainer = $("<div class='recipeContainer'>");
-              $("#recipeResults").append(recipeContainer);
-              var recipeNameTag = $("<h3 class='recName'>").text(recipeName) 
-              recipeContainer.append(recipeNameTag);
-              var recipeImageDiv = $(`<div class='image'> <img src='${recipeImage}'> </div>`)
-              recipeContainer.append(recipeImageDiv);
-              var detailsList = $("<ul class='detailsList'>");
-              recipeContainer.append(detailsList);
-              var cookTimeLi = $("<li class='it'>  Cook Time:  <span class='restName cookTime'></span></li>");
-              cookTimeLi.find(".cookTime").text(time);
-              detailsList.append(cookTimeLi);
-              
-              var caloriesLi = $("<li class='it'>  Calories:  <span class='restName calories'></span></li>");
-              caloriesLi.find(".calories").text(calories);
-              detailsList.append(caloriesLi);
-              
-           
+
+
+
+
 
             };
-           
+
         })
 })
 
-  
