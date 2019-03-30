@@ -34,24 +34,45 @@ $("#subBtn").click(function () {
     // the ajax calls
     $.get(getRecipesUrl)
         .then(function (results) {
+            console.log(results)
             // display 5 recipes
             var recipes = results.matches
             console.log(recipes)
             for (var i = 0; i < recipes.length; i++) {
-                var name = recipes[i].recipeName;
-
-                var id = recipes[i].id;
-
+                var recipeName = recipes[i].recipeName;
+                var recipeId = recipes[i].id;
                 var ingredients = recipes[i].ingredients
                 var time = (recipes[i].totalTimeInSeconds) / 60
-                var image = recipes[i].smallImageUrls[0]
-                var getRecipeStepsUrl = `https://api.yummly.com/v1/api/recipe/${id}?_app_id=${apiId}&_app_key=${apiKey}`
-
+                var calories = 200
+                var recipeImage = recipes[i].smallImageUrls[0]
+                var getRecipeStepsUrl = `https://api.yummly.com/v1/api/recipe/${recipeId}?_app_id=${apiId}&_app_key=${apiKey}`
+                
+                //gets the recipe steps
                 $.get(getRecipeStepsUrl)
                     .then(function (results) {
                         link = results.source.sourceRecipeUrl
                     });
+              // Build HTML
+              var recipeContainer = $("<div class='recipeContainer'>");
+              $("#recipeResults").append(recipeContainer);
+              var recipeNameTag = $("<h3 class='recName'>").text(recipeName) 
+              recipeContainer.append(recipeNameTag);
+              var recipeImageDiv = $(`<div class='image'> <img src='${recipeImage}'> </div>`)
+              recipeContainer.append(recipeImageDiv);
+              var detailsList = $("<ul class='detailsList'>");
+              recipeContainer.append(detailsList);
+              var cookTimeLi = $("<li class='it'>  Cook Time:  <span class='restName cookTime'></span></li>");
+              cookTimeLi.find(".cookTime").text(time);
+              detailsList.append(cookTimeLi);
+              
+              var caloriesLi = $("<li class='it'>  Calories:  <span class='restName calories'></span></li>");
+              caloriesLi.find(".calories").text(calories);
+              detailsList.append(caloriesLi);
+              
+           
+
             };
+           
         })
 })
 
