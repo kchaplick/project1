@@ -58,3 +58,16 @@ header{
   width: 750px;
   margin: auto;
 }
+
+.restaurant-name{
+  font-family: 'Caveat Brush', cursive;
+  font-size: 35px;
+  padding-top: 30px;
+  margin-bottom: 10px;
+
+}
+.numberSpacing{
+/* float: right;*/
+margin-left: 70px;
+color: #afb42b;
+}

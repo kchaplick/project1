@@ -95,14 +95,24 @@ const restaurantList = (lat, lng) => {
       // Build HTML Tags
       let restDataDiv = $("<div>");
       let restNameTag = $("<h3>").text(restName);
-      restNameTag.addClass("restaurant-name");
+      restNameTag.addClass("restaurant-name col s12");
       // let ulTag = $("<lu>")
-      let restWebsiteTag = $("<p>").text(`Website: ${restUrl}`)
-      restWebsiteTag.attr("href", `${restUrl}`)
+      let restWebsiteTag = $("<a>").text(`Click to Visit Website`); 
+      // ${restUrl}`);
+      restWebsiteTag.attr("href", `${restUrl}`, "target='_blank'");
+      restWebsiteTag.attr("target", "_blank");
+      restWebsiteTag.addClass("col s12");
 
-      let restNumberTag = $("<p>").text(`Number: ${restPhoneNumber}`)
-      let restAddressTag = $("<p>").text(`Address: ${restAddress}`)
-      let restRatingTag = $("<p>").text(`Rating: ${restRating}`)
+      
+      let restNumberTag = $("<a>").text(`Number: ${restPhoneNumber}`);
+      restNumberTag.attr("href",`tel:${restPhoneNumber}`);
+      restNumberTag.addClass("numberSpacing");
+
+      // restNumberTag.attr("href", "callto:"+ restPhoneNumber);
+
+      let restAddressTag = $("<p>").text(`Address: ${restAddress}`);
+      let restRatingTag = $("<p>").text(`Rating: ${restRating}`);
+      
 
       $(restDataDiv).append(restNameTag)
       $(restDataDiv).append(restWebsiteTag)
