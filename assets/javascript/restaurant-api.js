@@ -37,10 +37,14 @@ $("#sub-btn").on("click", function (event) {
   locations = [];
   addressInput = $("#address-input").val();
   priceSelect = $("#price-select").val();
+  // If no price range was selected
+  if (!priceSelect) {
+    priceSelect = '1,2,3,4';
+  }
   cuisineInput = $("#cuisine-input").val()//.toLowerCase();
   // Log input results
-  console.log('Input values', addressInput, distanceSelect, priceSelect, cuisineInput)
-  // Caluculate price range
+  console.log('Input values', addressInput, priceSelect, cuisineInput)
+
   // Invoke Google ajax function
   zipcodeLatLng(addressInput);
 });
@@ -74,45 +78,72 @@ const restaurantList = (lat, lng) => {
     console.log(response)
     let restResponse = response.businesses;
 
+    // Empty Div
+    $("#restaurant-list-conatiner").empty();
     // Loop through response array
     restResponse.forEach((rest) => {
       let restId = rest.id;
       let restName = rest.name;
       let restAddressArray = rest.location.display_address;
-      let restAddress = restAddressArray.join(',')
+      let restAddress = restAddressArray.join(', ')
       let restPhoneNumber = rest.phone;
+      let formatPhoneNumber;
       let restRating = rest.rating;
       let restPrice = rest.price;
       let restUrl = rest.url;
       let restLat = rest.coordinates.latitude;
       let restLng = rest.coordinates.longitude;
 
+
+      // Format phone number 
+      function convertPhoneNumber(phoneNumberString) {
+        let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+        let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+        if (match) {
+          let intlCode = (match[1] ? '' : '')
+          formatPhoneNumber = [intlCode, match[2], '-', match[3], '-', match[4]].join('');
+          console.log(formatPhoneNumber);
+        }
+        if (!formatPhoneNumber) {
+          formatPhoneNumber = "Phone number not available"
+        }
+      }
+      convertPhoneNumber(rest.phone);
+
       // Log return values 
       console.log(restId, restName, restAddress, restPhoneNumber, restRating, restPrice, restUrl, restLat, restLng);
       // Push restaurant data to locations array to build map markers
       locations.push([restName, restLat, restLng])
+
+      console.log("Phone number", formatPhoneNumber);
+      if (formatPhoneNumber) {
+        console.log('true')
+      } else {
+        console.log('false')
+      }
+
 
       // Build HTML Tags
       let restDataDiv = $("<div>");
       let restNameTag = $("<h3>").text(restName);
       restNameTag.addClass("restaurant-name col s12");
       // let ulTag = $("<lu>")
-      let restWebsiteTag = $("<a>").text(`Click to Visit Website`); 
+      let restWebsiteTag = $("<a>").text(`Click to Visit Website`);
       // ${restUrl}`);
       restWebsiteTag.attr("href", `${restUrl}`, "target='_blank'");
       restWebsiteTag.attr("target", "_blank");
       restWebsiteTag.addClass("col s12");
 
-      
-      let restNumberTag = $("<a>").text(`Number: ${restPhoneNumber}`);
-      restNumberTag.attr("href",`tel:${restPhoneNumber}`);
+
+      let restNumberTag = $("<a>").text(`Number: ${formatPhoneNumber}`);
+      restNumberTag.attr("href", `tel:${formatPhoneNumber}`);
       restNumberTag.addClass("numberSpacing");
 
       // restNumberTag.attr("href", "callto:"+ restPhoneNumber);
 
       let restAddressTag = $("<p>").text(`Address: ${restAddress}`);
       let restRatingTag = $("<p>").text(`Rating: ${restRating}`);
-      
+
 
       $(restDataDiv).append(restNameTag)
       $(restDataDiv).append(restWebsiteTag)
