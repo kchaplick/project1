@@ -43,7 +43,8 @@
                     <div class="col s8 center-align">
                         <h5 id="subHeaders" class="center-align">So... You're Eating-In?</h5>
                         <p class="grey-text text-darken-2 center-align">
-                            Enter your preferences by filling out the form below. <br>Feeling adventurous, leave it blank
+                            Enter your preferences by filling out the form below. <br>Feeling adventurous, leave it
+                            blank
                             and we'll select your meal for you. Enjoy!
                         </p>
                         <br>
@@ -65,18 +66,18 @@
         <div class="row">
             <div class="col s8">
             <label>Select your preferred Cook time</label>
-            <select class="browser-default">
+            <select id="cookingtime" class="browser-default">
                 <option value="" disabled selected>Cook time options</option>
-                <option value="1">15</option>
-                <option value="2">20</option>
-                <option value="2">25</option>
-                <option value="3">30</option>
-                <option value="2">35</option>
-                <option value="3">40</option>
-                <option value="2">45</option>
-                <option value="3">50</option>
-                <option value="2">55</option>
-                <option value="3">60</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+                <option value="60">60</option>
             </select>
             </div>
         </div>
@@ -84,14 +85,14 @@
         <div class="row">
             <div class="col s8">
             <label>Select your dietary preference</label>
-            <select class="browser-default multiple">
+            <select id="dietary" class="browser-default multiple">
                 <option value="" disabled selected>Dietary options</option>
-                <option value="1">Balanced</option>
-                <option value="2">High-fiber</option>
-                <option value="2">High-protein</option>
-                <option value="3">Low-carb</option>
-                <option value="2">Low-fat</option>
-                <option value="3">Low-sodium</option>
+
+                <option value="FIBTG">High-fiber</option>
+                <option value="PROCNT">High-protein</option>
+                <option value="CHOCDF">Low-carb</option>
+                <option value="FASAT">Low-fat</option>
+                <option value="NA">Low-sodium</option>
             </select>
             </div>
         </div>
@@ -99,14 +100,14 @@
         <div class="row">
             <div class="col s8">
             <label>Select Health Labels</label>
-            <select class="browser-default">
+            <select id="allergy" class="browser-default">
                 <option value="" disabled selected>Health Label options</option>
-                <option value="1">Crustacean-free</option>
-                <option value="2">Gluten-free</option>
-                <option value="2">Koshere</option>
-                <option value="3">Peanut-free</option>
-                <option value="2">Vegetarian</option>
-                <option value="3">Soy-free</option>
+
+                <option value="393^Gluten-Free">Gluten-free</option>
+
+                <option value="394^Peanut-Free">Peanut-free</option>
+
+                <option value="400^Soy-Free">Soy-free</option>
             </select>
             </div>
         </div>
@@ -129,7 +130,8 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script type="text/javascript" src="assets/javascript/recipes-api.js"></script>
     <script type="text/javascript" src="assets/javascript/restaurant-api.js"></script>
 
 </body>
