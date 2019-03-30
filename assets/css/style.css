@@ -4,6 +4,7 @@ body{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  padding-bottom: 20px;
 }
 
 #main-container{
@@ -104,8 +105,8 @@ body{
   #coin {
     position: relative;
     margin: 0 auto;
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 160px;
     cursor: pointer;
   }
   #coin div {
@@ -129,8 +130,9 @@ body{
   }
 
   .question-mark{
-    font-family: 'Caveat Brush', cursive;
-    font-size:3rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size:6rem;
     color: white;
   }
   .coin-text-heads{
@@ -215,3 +217,8 @@ body{
     margin: auto;
 }
 
+#subHeaders {
+  padding-top: 25px;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 45px;
+}
