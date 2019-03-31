@@ -35,3 +35,8 @@ header{
     padding-right: 2px;
 
 }
+
+.recName {
+    font-family: 'Caveat Brush', cursive;
+    font-size: 2rem;
+}

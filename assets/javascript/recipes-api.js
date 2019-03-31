@@ -50,7 +50,7 @@ $("#subBtn").click(function () {
                   // Build HTML
                   var recipeContainer = $("<div class='recipeContainer'>");
                   $("#recipeResults").append(recipeContainer);
-                  var recipeNameTag = $("<h3 class='recName'>").text(recipeName)
+                  var recipeNameTag = $("<h1 class='recName'>").text(recipeName)
                   recipeContainer.append(recipeNameTag);
                   var recipeImageDiv = $(`<div class='image'> <img src='${recipeImage}'> </div>`)
                   recipeContainer.append(recipeImageDiv);
@@ -62,6 +62,21 @@ $("#subBtn").click(function () {
                   var caloriesLi = $("<li class='it'>  Calories:  <span id='"+recipeId+"' class='restName calories'></span></li>");
                   caloriesLi.find(".calories").text(calories);
                   detailsList.append(caloriesLi);
+                  var ingredientsDiv = $("<div>");
+                  recipeContainer.append(ingredientsDiv);
+                  var ingredientsHead = $("<h1 class'ingredientsHead'>Ingredients:</h1>");
+                  ingredientsDiv.append(ingredientsHead);
+                  var ingredientsOL = $("<ol class='ingredientsList'>")
+                  ingredientsDiv.append(ingredientsOL);
+                  for (var k = 0; k < ingredients.length; k++) {
+                      var ingredientsLi = $("<li>")
+                      ingredientsLi.text(ingredients[k]);
+                      ingredientsOL.append(ingredientsLi);
+                  }; 
+
+                 
+
+
 
                 //gets the recipe steps
                 $.get(getRecipeStepsUrl)
