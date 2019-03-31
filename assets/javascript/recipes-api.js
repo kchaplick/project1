@@ -147,13 +147,13 @@ $("#subBtn").click(function () {
           });
       };
     })
-  window.location.href = '../project1/manage-users.html';
-  // Full URL:
-  // https://kchaplick.github.io/project1/manage-users.html
 });
 
+window.location.href = '../project1/manage-users.html';
+// Full URL: https://kchaplick.github.io/project1/manage-users.html
 
-$(".favoriteEmpty").on("click", function () {
 
-})
+// $(".favoriteEmpty").on("click", function () {
+
+// })
 
