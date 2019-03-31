@@ -1,50 +1,5 @@
-// Setup your firebase reference
-// var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
 
-// // Setup a way to get your userid (Assuming using provided firebase authentication method...)
-// function getUser(authData) {
-//   switch (authData.provider) {
-//     case 'password':
-//       return authData.password.email;
-//     case 'google':
-//       return authData.google.email;
-//     case 'anonymous':
-//       return authData.anonymous.username;
-//   }
-// }
-
-// // Get authentication data
-// var authData = ref.getAuth();
-
-// // Get your user information
-// var userid = getUser(authData);
-
-// // Call your function to check if they are a first time user (aka exists).
-// checkForFirstTime(userid);
-
-// // Setup what to do with the user information.
-// function userFirstTimeCallback(userId, exists) {
-//   if (exists) {
-//     alert('user ' + userId + ' exists!');
-//     // Do something here you want to do for non-firstime users...
-//   } else {
-//     alert('user ' + userId + ' does not exist!');
-//     // Do something here you want to do for first time users (Store data in database?)
-//   }
-// }
-
-// // Tests to see if /users/<userId> exists. 
-// function checkForFirstTime(userId) {
-//   usersRef.child('users').child(userId).once('value', function (snapshot) {
-//     var exists = (snapshot.val() !== null);
-//     userFirstTimeCallback(userId, exists);
-//   });
-// }
-
-
-
-
-
+var database = firebase.database;
 
 // 1. if the person just click submit without filling out the form he shoulf 
 // 2. he should get 5 recipes of certain ingrediants - should be displayed
@@ -103,8 +58,10 @@ $("#subBtn").click(function () {
         recipeContainer.append(recipeNameContainer);
         var recipeNameTag = $("<h1 class='recName'>").text(recipeName)
         recipeNameContainer.append(recipeNameTag);
-        var favoriteEmpty = $("<i class='favoriteEmpty material-icons lime-text'>favorite_border</i>")
-        recipeNameContainer.append(favoriteEmpty);
+        var favoriteIcon = $("<i class='favoriteIcon material-icons lime-text'>favorite_border</i>")
+        favoriteIcon.attr("data-recipeId",recipeId);
+        favoriteIcon.data("recipeId",recipeId);
+        recipeNameContainer.append(favoriteIcon);
         var recipeImageDiv = $(`<div> <img class='image' src='${recipeImage}'> </div>`)
         recipeContainer.append(recipeImageDiv);
         var detailsList = $("<ul class='detailsList'>");
@@ -153,6 +110,12 @@ $("#subBtn").click(function () {
 });
 
 
-// $(".favoriteEmpty").on("click", function)
+$(document).on("click", ".favoriteIcon" , function(){
+  $(this).html("favorite");
+  var favoritedRecipe = $(this).data("recipeId")
+  console.log("The recipeId is: " + favoritedRecipe);
+  database.ref().child(`users/${user.uid}/favorites`).set(favoritedRecipe);
+
+});
 
 
