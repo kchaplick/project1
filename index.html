@@ -116,7 +116,22 @@
             console.log('user id', uid)
             console.log('provider', providerData)
         }
+        // Store user id and name to database;
+        console.log('add user to firebase database')
+        firebase.database().ref('/users/' + uid).set({
+            name: displayName,
+            email: email,
+        }).catch(function (error) {
+            console.log(error)
+        });
     });
+    document.getElementById("sign-out").addEventListener("click", function () {
+        firebase.auth().signOut().then(function () {
+            console.log('Sign-out successful')
+        }).catch(function (error) {
+            console.log(error)
+        });
+    })
 </script>
 
 </html>
