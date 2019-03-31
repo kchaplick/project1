@@ -1,4 +1,14 @@
 // Setup your firebase reference
+// Initialize Firebase
+let config = {
+  apiKey: "AIzaSyB70faeS2A1Iihc_lXvJqwUEM2X8fU6kfk",
+  authDomain: "test-auth-cdc10.firebaseapp.com",
+  databaseURL: "https://test-auth-cdc10.firebaseio.com",
+  projectId: "test-auth-cdc10",
+  storageBucket: "test-auth-cdc10.appspot.com",
+  messagingSenderId: "242923614816"
+};
+firebase.initializeApp(config);
 // var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
 
 // // Setup a way to get your userid (Assuming using provided firebase authentication method...)
@@ -159,3 +169,23 @@ $("#subBtn").click(function () {
 
 // })
 
+
+
+// Firebase user data:
+// Setting observer
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    console.log('User is signed in')
+  } else {
+    console.log('No user is signed in')
+  }
+});
+
+let user = firebase.auth().currentUser
+if (user) {
+
+  console.log('User ID', user.uid)
+  console.log('User name', user.displayName);
+  console.log("User email", user.email)
+  console.log("User provider info", user.provider)
+}
