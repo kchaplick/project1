@@ -1,5 +1,5 @@
 // Setup your firebase reference
-//var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
+// var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
 
 // // Setup a way to get your userid (Assuming using provided firebase authentication method...)
 // function getUser(authData) {
@@ -63,9 +63,6 @@ var neut;
 var def;
 var defu;
 
-$("#subBtn").on("click", function () {
-  location.href = "../project1/auth.html";
-})
 // the on click function
 $("#subBtn").click(function () {
   randomIngrd = ingrds[Math.floor(ingrds.length * Math.random())]
@@ -149,9 +146,7 @@ $("#subBtn").click(function () {
               }
             }
           });
-        // Go to Authentication window
-        // window.location.href = '../project1/auth.html';
-        // Full URL: https://kchaplick.github.io/project1/manage-users.html
+
       };
 
     })
