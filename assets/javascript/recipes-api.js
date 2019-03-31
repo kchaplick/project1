@@ -52,19 +52,19 @@ $("#subBtn").click(function () {
                   $("#recipeResults").append(recipeContainer);
                   var recipeNameTag = $("<h1 class='recName'>").text(recipeName)
                   recipeContainer.append(recipeNameTag);
-                  var recipeImageDiv = $(`<div class='image'> <img src='${recipeImage}'> </div>`)
+                  var recipeImageDiv = $(`<div> <img class='image' src='${recipeImage}'> </div>`)
                   recipeContainer.append(recipeImageDiv);
                   var detailsList = $("<ul class='detailsList'>");
                   recipeContainer.append(detailsList);
-                  var cookTimeLi = $("<li class='it'>  Cook Time:  <span class='restName cookTime'></span></li>");
+                  var cookTimeLi = $("<li class='cookTimeLi grey-text text-darken-2'>  <span class='cookTitle'>Cook Time:</span>  <span class='grey-text text-darken-2 cookTime'></span></li>");
                   cookTimeLi.find(".cookTime").text(time);
                   detailsList.append(cookTimeLi);
-                  var caloriesLi = $("<li class='it'>  Calories:  <span id='"+recipeId+"' class='restName calories'></span></li>");
+                  var caloriesLi = $("<li class='caloriesLi grey-text text-darken-2'>  <span class='caloriesTitle'>Calories:</span>  <span id='"+recipeId+"' class='grey-text text-darken-2 calories'></span></li>");
                   caloriesLi.find(".calories").text(calories);
                   detailsList.append(caloriesLi);
                   var ingredientsDiv = $("<div>");
                   recipeContainer.append(ingredientsDiv);
-                  var ingredientsHead = $("<h1 class'ingredientsHead'>Ingredients:</h1>");
+                  var ingredientsHead = $("<h1 class='grey-text text-darken-2 ingredientsHead'>Ingredients:</h1>");
                   ingredientsDiv.append(ingredientsHead);
                   var ingredientsOL = $("<ol class='ingredientsList'>")
                   ingredientsDiv.append(ingredientsOL);
@@ -73,6 +73,8 @@ $("#subBtn").click(function () {
                       ingredientsLi.text(ingredients[k]);
                       ingredientsOL.append(ingredientsLi);
                   }; 
+                  var hr = $("<div class='divider'></div>")
+                  recipeContainer.append(hr);
 
                  
 
