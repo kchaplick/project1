@@ -42,6 +42,10 @@ body{
     padding-bottom: 20px;
 }
 
+.signIn{
+  color:#cddc39;
+}
+
 #arrow-row{
     display: flex;
     justify-content: center;
