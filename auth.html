@@ -61,7 +61,7 @@
       queryParameterForSignInSuccessUrl: 'signInSuccessUrl',
       // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
       signInFlow: 'popup',
-      signInSuccessUrl: 'https://fcarlone.github.io/test-auth/index.html',
+      signInSuccessUrl: 'https://kchaplick.github.io/project1/recipe.html',
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -79,15 +79,15 @@
         //     badge: 'bottomleft'
         //   }
         // },
-        // firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
       ],
       // tosUrl and privacyPolicyUrl accept either url string or a callback
       // function.
       // Terms of service url/callback.
-      tosUrl: 'https://fcarlone.github.io/test-auth/index.html',
+      tosUrl: 'https://kchaplick.github.io/project1/recipe.html',
       // Privacy policy url/callback.
       privacyPolicyUrl: function () {
-        window.location.assign('https://fcarlone.github.io/test-auth/index.html');
+        window.location.assign('https://kchaplick.github.io/project1/recipe.html');
       }
     };
 

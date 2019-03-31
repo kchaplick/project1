@@ -43,9 +43,7 @@
 
 
 
-// Go to Authentication window
-window.location.href = '../project1/manage-users.html';
-// Full URL: https://kchaplick.github.io/project1/manage-users.html
+
 
 
 // 1. if the person just click submit without filling out the form he shoulf 
@@ -147,10 +145,11 @@ $("#subBtn").click(function () {
               }
             }
           });
+        // Go to Authentication window
+        window.location.href = '../project1/auth.html';
+        // Full URL: https://kchaplick.github.io/project1/manage-users.html
       };
-      // Go to Authentication window
-      // window.location.href = '../project1/manage-users.html';
-      // Full URL: https://kchaplick.github.io/project1/manage-users.html
+
     })
 
 });
