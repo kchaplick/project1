@@ -17,6 +17,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB70faeS2A1Iihc_lXvJqwUEM2X8fU6kfk",
+            authDomain: "test-auth-cdc10.firebaseapp.com",
+            databaseURL: "https://test-auth-cdc10.firebaseio.com",
+            projectId: "test-auth-cdc10",
+            storageBucket: "test-auth-cdc10.appspot.com",
+            messagingSenderId: "242923614816"
+        };
+        firebase.initializeApp(config);
+    </script>
 </head>
 
 <body>
@@ -65,50 +78,50 @@
 
         <div class="row">
             <div class="col s12">
-            <label>Select your preferred Cook time</label>
-            <select id="cookingtime" class="browser-default">
-                <option value="" disabled selected>Cook time options</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-                <option value="30">30</option>
-                <option value="35">35</option>
-                <option value="40">40</option>
-                <option value="45">45</option>
-                <option value="50">50</option>
-                <option value="55">55</option>
-                <option value="60">60</option>
-            </select>
+                <label>Select your preferred Cook time</label>
+                <select id="cookingtime" class="browser-default">
+                    <option value="" disabled selected>Cook time options</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                    <option value="60">60</option>
+                </select>
             </div>
         </div>
 
         <div class="row">
             <div class="col s12">
-            <label>Select your dietary preference</label>
-            <select id="dietary" class="browser-default multiple">
-                <option value="" disabled selected>Dietary options</option>
+                <label>Select your dietary preference</label>
+                <select id="dietary" class="browser-default multiple">
+                    <option value="" disabled selected>Dietary options</option>
 
-                <option value="FIBTG">High-fiber</option>
-                <option value="PROCNT">High-protein</option>
-                <option value="CHOCDF">Low-carb</option>
-                <option value="FASAT">Low-fat</option>
-                <option value="NA">Low-sodium</option>
-            </select>
+                    <option value="FIBTG">High-fiber</option>
+                    <option value="PROCNT">High-protein</option>
+                    <option value="CHOCDF">Low-carb</option>
+                    <option value="FASAT">Low-fat</option>
+                    <option value="NA">Low-sodium</option>
+                </select>
             </div>
         </div>
 
         <div class="row">
             <div class="col s12">
-            <label>Select Health Labels</label>
-            <select id="allergy" class="browser-default">
-                <option value="" disabled selected>Health Label options</option>
+                <label>Select Health Labels</label>
+                <select id="allergy" class="browser-default">
+                    <option value="" disabled selected>Health Label options</option>
 
-                <option value="393^Gluten-Free">Gluten-free</option>
+                    <option value="393^Gluten-Free">Gluten-free</option>
 
-                <option value="394^Peanut-Free">Peanut-free</option>
+                    <option value="394^Peanut-Free">Peanut-free</option>
 
-                <option value="400^Soy-Free">Soy-free</option>
-            </select>
+                    <option value="400^Soy-Free">Soy-free</option>
+                </select>
             </div>
         </div>
 
@@ -121,21 +134,42 @@
 
     </div>
 
-    
+
 
     <div class="container">
         <div class="row">
-            <div id ="recipeResults" class="col s12">
-                
-            </div>
-        </div>    
+            <div id="recipeResults" class="col s12">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-    <script type="text/javascript" src="assets/javascript/recipes-api.js"></script>
-    <script type="text/javascript" src="assets/javascript/restaurant-api.js"></script>
+            </div>
+        </div>
+
+        <!-- Compiled and minified JavaScript -->
+       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/javascript/recipes-api.js"></script>
+        <script type="text/javascript" src="assets/javascript/restaurant-api.js"></script>
+        <script>
+            // Firebase user data:
+            // Setting observer
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    console.log('User is signed in')
+                    console.log('User ID', user.uid)
+                    console.log('User name', user.displayName);
+                    console.log("User email", user.email)
+                    console.log("User provider info", user.providerData)
+                } else {
+                    console.log('No user is signed in')
+                }
+            });
+
+            let user = firebase.auth().currentUser
+            if (user) {
+                console.log('User', user)
+            }
+        </script>
+
 
 </body>
 

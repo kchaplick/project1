@@ -11,6 +11,19 @@
     <link href="https://fonts.googleapis.com/css?family=Caveat+Brush%7CRoboto:400,500,700,900" rel="stylesheet">
     <!--project css-->
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB70faeS2A1Iihc_lXvJqwUEM2X8fU6kfk",
+            authDomain: "test-auth-cdc10.firebaseapp.com",
+            databaseURL: "https://test-auth-cdc10.firebaseio.com",
+            projectId: "test-auth-cdc10",
+            storageBucket: "test-auth-cdc10.appspot.com",
+            messagingSenderId: "242923614816"
+        };
+        firebase.initializeApp(config);
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -20,62 +33,63 @@
 <body>
     <div id="main-container" class="container">
 
-                <!--Logo-->
-                <div id="logo-row" class="row">
-                    <div id="logo-container">
-                        <img id="logo-flip" class="flip-horizontal-bottom lime-text accent-2 " src="assets/images/Logo_MealFlip.png">
-                    </div>
-                </div>
-                <!--directions-->
-                <div id="directions-container" class="row">
-                    <div id="directions-column" class="col s12">
-                        <div id="welcome-container">
-                            <div class="container">
-                                    <div class="col s12 center-align">
-                                            <h5 id="subHeaders" class="center-align">Are you feeling lucky?</h5>
-                                            <p class="grey-text text-darken-2 center-align">
-                                                Decisions are hard, so leave it up to fate!<br> Flip the coin to find out if you should start pulling out the pots and pans or dust off your dancing shoes and take on the town.
-
-                                            </p>
-                                            <!-- <div id="arrow-row" class="row">
+        <!--Logo-->
+        <div id="logo-row" class="row">
+            <div id="logo-container">
+                <img id="logo-flip" class="flip-horizontal-bottom lime-text accent-2 "
+                    src="assets/images/Logo_MealFlip.png">
+            </div>
+        </div>
+        <!--directions-->
+        <div id="directions-container" class="row">
+            <div id="directions-column" class="col s12">
+                <div id="welcome-container">
+                    <div class="container">
+                        <div class="col s12 center-align">
+                            <h5 id="subHeaders" class="center-align">Are you feeling lucky?</h5>
+                            <p class="grey-text text-darken-2 center-align">
+                                Decisions are hard, so leave it up to fate!<br> Flip the coin to find out if you should
+                                start pulling out the pots and pans or dust off your dancing shoes and take on the town.
+                            </p>
+                            <!-- <div id="arrow-row" class="row">
                                             <i id="arrow" class="material-icons left">arrow_downward</i>
                                             </div> -->
-                                      
-
-                                    </div>
-                            </div>
+                            <a href="auth.html">sign-in</a>
+                            <div id="sign-out"></div>
                         </div>
                     </div>
-                    </main>
-
                 </div>
+            </div>
+            </main>
+
+        </div>
+    </div>
+    </div>
+
+    <!--coin-->
+    <div id="coin-container" class="row">
+        <div id="coin">
+            <div class="eat-in">
+                <p class="question-mark">?</p>
+            </div>
+            <div class="eat-out">
+
+
             </div>
         </div>
 
-        <!--coin-->
-        <div id="coin-container" class="row">
-            <div id="coin">
-                <div class="eat-in">
-                    <p class="question-mark">?</p>
-                </div>
-                <div class="eat-out">
+    </div>
 
+    <!--flip button-->
+    <div id="flip-button-container" class="row">
+        <a id="flip-button" class="lime waves-effect waves-light btn-large">Flip</a>
 
-                </div>
-            </div>
-
-        </div>
-
-        <!--flip button-->
-        <div id="flip-button-container" class="row">
-            <a id="flip-button" class="lime waves-effect waves-light btn-large">Flip</a>
-
-        </div>
+    </div>
 
 
 
 
-        <!--end main container-->
+    <!--end main container-->
     </div>
 
     <!-- Compiled and minified JavaScript -->
@@ -85,5 +99,39 @@
     <script src="assets/javascript/coinflip.js"></script>
 
 </body>
+<script>
+    let displayName;
+    let email;
+    let uid;
+    let providerData;
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            displayName = user.displayName;
+            email = user.email;
+            uid = user.uid;
+            providerData = user.providerData
+            // let userID = Auth.auth().currentUser!.uid
+            console.log('user name', displayName)
+            console.log('user id', uid)
+            console.log('provider', providerData)
+        }
+        // Store user id and name to database;
+        console.log('add user to firebase database')
+        firebase.database().ref('/users/' + uid).set({
+            name: displayName,
+            email: email,
+        }).catch(function (error) {
+            console.log(error)
+        });
+    });
+    document.getElementById("sign-out").addEventListener("click", function () {
+        firebase.auth().signOut().then(function () {
+            console.log('Sign-out successful')
+        }).catch(function (error) {
+            console.log(error)
+        });
+    })
+</script>
 
 </html>

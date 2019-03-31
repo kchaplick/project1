@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Roboto:400,500,700,900" rel="stylesheet">
     <!--css file -->
     <link type="text/css" rel="stylesheet" href="assets/css/restaurant-style.css" />
-    <link type="text/css" rel="stylesheet" href="assets/css/popup.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/popup.css" />
 
     <link type="text/css" rel="stylesheet" href="assets/css/restResults-style.css" />
 
@@ -26,21 +26,20 @@
 
 <body>
     <!-- Modal Trigger -->
-    <a href="#" data-target="modal1" class="btn modal-trigger lime waves-effect waves-light">Save your results!</a>
+    <!-- <a href="#" data-target="modal1" class="btn modal-trigger lime waves-effect waves-light">Save your results!</a> -->
 
     <!-- Modal Structure -->
-    <div id="modal1" class="modal">
+    <!-- <div id="modal1" class="modal">
         <div class="modal-footer">
-            <a  class="modal-close waves-effect waves-green btn-flat"><i
-                    class="material-icons left">close</i></a>
+            <a class="modal-close waves-effect waves-green btn-flat"><i class="material-icons left">close</i></a>
         </div>
-        <div class="modal-content">
-            <h4 id="subHeader" class="center-align">Create an Account</h4>
-            <!-- The surrounding HTML is left untouched by FirebaseUI.
+        <div class="modal-content"> -->
+    <h4 id="subHeader" class="center-align">Create an Account</h4>
+    <!-- The surrounding HTML is left untouched by FirebaseUI.
          Your app may use that space for branding, controls and other customizations.-->
-            <div id="firebaseui-auth-container"></div>
-            <div id="loader">Loading...</div>
-        </div>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+    </div>
 
     </div>
     <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
@@ -95,7 +94,7 @@
             queryParameterForSignInSuccessUrl: 'signInSuccessUrl',
             // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
             signInFlow: 'popup',
-            signInSuccessUrl: 'https://fcarlone.github.io/test-auth/index.html',
+            signInSuccessUrl: 'https://kchaplick.github.io/project1/recipe.html',
             signInOptions: [
                 // Leave the lines as is for the providers you want to offer your users.
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -118,10 +117,10 @@
             // tosUrl and privacyPolicyUrl accept either url string or a callback
             // function.
             // Terms of service url/callback.
-            tosUrl: 'https://fcarlone.github.io/test-auth/index.html',
+            tosUrl: 'https://kchaplick.github.io/project1/recipe.html',
             // Privacy policy url/callback.
             privacyPolicyUrl: function () {
-                window.location.assign('https://fcarlone.github.io/test-auth/index.html');
+                window.location.assign('https://kchaplick.github.io/project1/recipe.html');
             }
         };
 
