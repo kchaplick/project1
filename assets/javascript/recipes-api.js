@@ -157,5 +157,5 @@ $("#subBtn").click(function () {
 });
 
 
-$(".favoriteEmpty").on("click", function)
+// $(".favoriteEmpty").on("click", function)
 
