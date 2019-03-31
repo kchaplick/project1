@@ -1,45 +1,45 @@
 // Setup your firebase reference
-var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
+//var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
 
-// Setup a way to get your userid (Assuming using provided firebase authentication method...)
-function getUser(authData) {
-    switch(authData.provider) {
-        case 'password':
-           return authData.password.email;
-         case 'google':
-           return authData.google.email;
-         case 'anonymous':
-           return authData.anonymous.username;
-    }    
-}
+// // Setup a way to get your userid (Assuming using provided firebase authentication method...)
+// function getUser(authData) {
+//   switch (authData.provider) {
+//     case 'password':
+//       return authData.password.email;
+//     case 'google':
+//       return authData.google.email;
+//     case 'anonymous':
+//       return authData.anonymous.username;
+//   }
+// }
 
-// Get authentication data
-var authData = ref.getAuth();
+// // Get authentication data
+// var authData = ref.getAuth();
 
-// Get your user information
-var userid = getUser(authData);
+// // Get your user information
+// var userid = getUser(authData);
 
-// Call your function to check if they are a first time user (aka exists).
-checkForFirstTime(userid);
+// // Call your function to check if they are a first time user (aka exists).
+// checkForFirstTime(userid);
 
-// Setup what to do with the user information.
-function userFirstTimeCallback(userId, exists) {
-  if (exists) {
-    alert('user ' + userId + ' exists!');
-    // Do something here you want to do for non-firstime users...
-  } else {
-    alert('user ' + userId + ' does not exist!');
-    // Do something here you want to do for first time users (Store data in database?)
-  }
-}
+// // Setup what to do with the user information.
+// function userFirstTimeCallback(userId, exists) {
+//   if (exists) {
+//     alert('user ' + userId + ' exists!');
+//     // Do something here you want to do for non-firstime users...
+//   } else {
+//     alert('user ' + userId + ' does not exist!');
+//     // Do something here you want to do for first time users (Store data in database?)
+//   }
+// }
 
-// Tests to see if /users/<userId> exists. 
-function checkForFirstTime(userId) {
-  usersRef.child('users').child(userId).once('value', function(snapshot) {
-    var exists = (snapshot.val() !== null);
-    userFirstTimeCallback(userId, exists);
-  });
-}
+// // Tests to see if /users/<userId> exists. 
+// function checkForFirstTime(userId) {
+//   usersRef.child('users').child(userId).once('value', function (snapshot) {
+//     var exists = (snapshot.val() !== null);
+//     userFirstTimeCallback(userId, exists);
+//   });
+// }
 
 
 
@@ -64,98 +64,96 @@ var def;
 var defu;
 // the on click function
 $("#subBtn").click(function () {
-    randomIngrd = ingrds[Math.floor(ingrds.length * Math.random())]
-    userTime = $("#cookingtime").val()
-    timeInSeconds = userTime * 60
-    userIngredient = $("#ingredients").val().trim();
-    var userDiet = $("#dietary").val()
-    var userHealth = $("#allergy").val()
-    def = "FASAT"
-    defu = "393^Gluten-Free"
-    //the search using the form or no
+  randomIngrd = ingrds[Math.floor(ingrds.length * Math.random())]
+  userTime = $("#cookingtime").val()
+  timeInSeconds = userTime * 60
+  userIngredient = $("#ingredients").val().trim();
+  var userDiet = $("#dietary").val()
+  var userHealth = $("#allergy").val()
+  def = "FASAT"
+  defu = "393^Gluten-Free"
+  //the search using the form or no
 
-    getRecipesUrl = `https://api.yummly.com/v1/api/recipes?_app_id=${apiId}&_app_key=${apiKey}&q=${userIngredient ? userIngredient : randomIngrd}&requirePictures=true&maxTotalTimeInSeconds=${timeInSeconds ? timeInSeconds : 2400}&nutrition.${userDiet ? userDiet : def}.max=20&allowedAllergy[]=${userHealth ? userHealth : defu}&maxResult=5&start=5&sourceRecipeUrl`
-
-
-
-
-    // the ajax calls
-    $.get(getRecipesUrl)
-        .then(function (results) {
-            console.log(results)
-            // display 5 recipes
-            var recipes = results.matches
-            console.log(recipes)
-            for (var i = 0; i < recipes.length; i++) {
-                var recipeName = recipes[i].recipeName;
-                var recipeId = recipes[i].id;
-                var ingredients = recipes[i].ingredients
-                var time = (recipes[i].totalTimeInSeconds) / 60
-                var calories = 200
-                var recipeImage = recipes[i].smallImageUrls[0]
-                var getRecipeStepsUrl = `https://api.yummly.com/v1/api/recipe/${recipeId}?_app_id=${apiId}&_app_key=${apiKey}`
-
-                  // Build HTML
-                  var recipeContainer = $("<div class='recipeContainer'>");
-                  $("#recipeResults").append(recipeContainer);
-                  var recipeNameContainer = $("<div>")
-                  recipeContainer.append(recipeNameContainer);
-                  var recipeNameTag = $("<h1 class='recName'>").text(recipeName)
-                  recipeNameContainer.append(recipeNameTag);
-                  var favoriteEmpty  = $("<i class='favoriteEmpty material-icons lime-text'>favorite_border</i>")
-                  recipeNameContainer.append(favoriteEmpty);
-                  var recipeImageDiv = $(`<div> <img class='image' src='${recipeImage}'> </div>`)
-                  recipeContainer.append(recipeImageDiv);
-                  var detailsList = $("<ul class='detailsList'>");
-                  recipeContainer.append(detailsList);
-                  var cookTimeLi = $("<li class='cookTimeLi grey-text text-darken-2'>  <span class='cookTitle'>Cook Time:</span>  <span class='grey-text text-darken-2 cookTime'></span></li>");
-                  cookTimeLi.find(".cookTime").text(time);
-                  detailsList.append(cookTimeLi);
-                  var caloriesLi = $("<li class='caloriesLi grey-text text-darken-2'>  <span class='caloriesTitle'>Calories:</span>  <span id='"+recipeId+"' class='grey-text text-darken-2 calories'></span></li>");
-                  caloriesLi.find(".calories").text(calories);
-                  detailsList.append(caloriesLi);
-                  var ingredientsDiv = $("<div>");
-                  recipeContainer.append(ingredientsDiv);
-                  var ingredientsHead = $("<h1 class='grey-text text-darken-2 ingredientsHead'>Ingredients:</h1>");
-                  ingredientsDiv.append(ingredientsHead);
-                  var ingredientsOL = $("<ol class='ingredientsList'>")
-                  ingredientsDiv.append(ingredientsOL);
-                  for (var k = 0; k < ingredients.length; k++) {
-                      var ingredientsLi = $("<li>")
-                      ingredientsLi.text(ingredients[k]);
-                      ingredientsOL.append(ingredientsLi);
-                  }; 
-                  var hr = $("<div class='divider'></div>")
-                  recipeContainer.append(hr);
-
-                 
+  getRecipesUrl = `https://api.yummly.com/v1/api/recipes?_app_id=${apiId}&_app_key=${apiKey}&q=${userIngredient ? userIngredient : randomIngrd}&requirePictures=true&maxTotalTimeInSeconds=${timeInSeconds ? timeInSeconds : 2400}&nutrition.${userDiet ? userDiet : def}.max=20&allowedAllergy[]=${userHealth ? userHealth : defu}&maxResult=5&start=5&sourceRecipeUrl`
 
 
 
-                //gets the recipe steps
-                $.get(getRecipeStepsUrl)
-                    .then(function (results) {
-                        link = results.source.sourceRecipeUrl
-                        for (var i = 0; i < results.nutritionEstimates.length; i++) {
-                            if (results.nutritionEstimates[i].attribute === "ENERC_KCAL") {
-                               
-                                calories = Math.floor(results.nutritionEstimates[i].value)
-                                console.log(results)
-                                $("#"+results.id).text(calories);
-                            }
-                        }
-                      
-                    });
+
+  // the ajax calls
+  $.get(getRecipesUrl)
+    .then(function (results) {
+      console.log(results)
+      // display 5 recipes
+      var recipes = results.matches
+      console.log(recipes)
+      for (var i = 0; i < recipes.length; i++) {
+        var recipeName = recipes[i].recipeName;
+        var recipeId = recipes[i].id;
+        var ingredients = recipes[i].ingredients
+        var time = (recipes[i].totalTimeInSeconds) / 60
+        var calories = 200
+        var recipeImage = recipes[i].smallImageUrls[0]
+        var getRecipeStepsUrl = `https://api.yummly.com/v1/api/recipe/${recipeId}?_app_id=${apiId}&_app_key=${apiKey}`
+
+        // Build HTML
+        var recipeContainer = $("<div class='recipeContainer'>");
+        $("#recipeResults").append(recipeContainer);
+        var recipeNameContainer = $("<div>")
+        recipeContainer.append(recipeNameContainer);
+        var recipeNameTag = $("<h1 class='recName'>").text(recipeName)
+        recipeNameContainer.append(recipeNameTag);
+        var favoriteEmpty = $("<i class='favoriteEmpty material-icons lime-text'>favorite_border</i>")
+        recipeNameContainer.append(favoriteEmpty);
+        var recipeImageDiv = $(`<div> <img class='image' src='${recipeImage}'> </div>`)
+        recipeContainer.append(recipeImageDiv);
+        var detailsList = $("<ul class='detailsList'>");
+        recipeContainer.append(detailsList);
+        var cookTimeLi = $("<li class='cookTimeLi grey-text text-darken-2'>  <span class='cookTitle'>Cook Time:</span>  <span class='grey-text text-darken-2 cookTime'></span></li>");
+        cookTimeLi.find(".cookTime").text(time);
+        detailsList.append(cookTimeLi);
+        var caloriesLi = $("<li class='caloriesLi grey-text text-darken-2'>  <span class='caloriesTitle'>Calories:</span>  <span id='" + recipeId + "' class='grey-text text-darken-2 calories'></span></li>");
+        caloriesLi.find(".calories").text(calories);
+        detailsList.append(caloriesLi);
+        var ingredientsDiv = $("<div>");
+        recipeContainer.append(ingredientsDiv);
+        var ingredientsHead = $("<h1 class='grey-text text-darken-2 ingredientsHead'>Ingredients:</h1>");
+        ingredientsDiv.append(ingredientsHead);
+        var ingredientsOL = $("<ol class='ingredientsList'>")
+        ingredientsDiv.append(ingredientsOL);
+        for (var k = 0; k < ingredients.length; k++) {
+          var ingredientsLi = $("<li>")
+          ingredientsLi.text(ingredients[k]);
+          ingredientsOL.append(ingredientsLi);
+        };
+        var hr = $("<div class='divider'></div>")
+        recipeContainer.append(hr);
 
 
 
 
 
-            };
+        //gets the recipe steps
+        $.get(getRecipeStepsUrl)
+          .then(function (results) {
+            link = results.source.sourceRecipeUrl
+            for (var i = 0; i < results.nutritionEstimates.length; i++) {
+              if (results.nutritionEstimates[i].attribute === "ENERC_KCAL") {
 
-        })
+                calories = Math.floor(results.nutritionEstimates[i].value)
+                console.log(results)
+                $("#" + results.id).text(calories);
+              }
+            }
+          });
+      };
+    })
+  window.location.href = '../project1/manage-users.html';
+  // Full URL:
+  // https://kchaplick.github.io/project1/manage-users.html
 });
 
 
-$(".favoriteEmpty").on("click", function)
+$(".favoriteEmpty").on("click", function () {
+
+})
 
