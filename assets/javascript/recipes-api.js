@@ -62,6 +62,10 @@ var userTime;
 var neut;
 var def;
 var defu;
+
+$("#subBtn").on("click", function () {
+  location.href = "../project1/auth.html";
+})
 // the on click function
 $("#subBtn").click(function () {
   randomIngrd = ingrds[Math.floor(ingrds.length * Math.random())]
@@ -146,12 +150,11 @@ $("#subBtn").click(function () {
             }
           });
         // Go to Authentication window
-        window.location.href = '../project1/auth.html';
+        // window.location.href = '../project1/auth.html';
         // Full URL: https://kchaplick.github.io/project1/manage-users.html
       };
 
     })
-
 });
 
 
