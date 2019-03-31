@@ -149,7 +149,7 @@ $("#subBtn").click(function () {
           });
       };
       // Go to Authentication window
-      window.location.href = '../project1/manage-users.html';
+      // window.location.href = '../project1/manage-users.html';
       // Full URL: https://kchaplick.github.io/project1/manage-users.html
     })
 
