@@ -1,5 +1,5 @@
 // Setup your firebase reference
-//var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
+// var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
 
 // // Setup a way to get your userid (Assuming using provided firebase authentication method...)
 // function getUser(authData) {
@@ -150,7 +150,6 @@ $("#subBtn").click(function () {
       };
 
     })
-  location.href = "../project1/auth.html";
 });
 
 
