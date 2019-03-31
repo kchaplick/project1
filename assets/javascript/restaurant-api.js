@@ -156,6 +156,10 @@ const restaurantList = (lat, lng) => {
     })
     console.log(locations)
     initMap();
+    // Scroll to of map
+    $("html, body").animate({
+      scrollTop: $("#map").offset().top
+    }, 700);
   })
 };
 
