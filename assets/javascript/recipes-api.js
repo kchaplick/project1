@@ -50,8 +50,12 @@ $("#subBtn").click(function () {
                   // Build HTML
                   var recipeContainer = $("<div class='recipeContainer'>");
                   $("#recipeResults").append(recipeContainer);
+                  var recipeNameContainer = $("<div>")
+                  recipeContainer.append(recipeNameContainer);
                   var recipeNameTag = $("<h1 class='recName'>").text(recipeName)
-                  recipeContainer.append(recipeNameTag);
+                  recipeNameContainer.append(recipeNameTag);
+                  var favoriteEmpty  = $("<i class='favoriteEmpty material-icons lime-text'>favorite_border</i>")
+                  recipeNameContainer.append(favoriteEmpty);
                   var recipeImageDiv = $(`<div> <img class='image' src='${recipeImage}'> </div>`)
                   recipeContainer.append(recipeImageDiv);
                   var detailsList = $("<ul class='detailsList'>");
