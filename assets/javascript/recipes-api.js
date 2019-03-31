@@ -1,3 +1,51 @@
+// Setup your firebase reference
+var ref = new Firebase('https://test-auth-cdc10.firebaseio.com/');
+
+// Setup a way to get your userid (Assuming using provided firebase authentication method...)
+function getUser(authData) {
+    switch(authData.provider) {
+        case 'password':
+           return authData.password.email;
+         case 'google':
+           return authData.google.email;
+         case 'anonymous':
+           return authData.anonymous.username;
+    }    
+}
+
+// Get authentication data
+var authData = ref.getAuth();
+
+// Get your user information
+var userid = getUser(authData);
+
+// Call your function to check if they are a first time user (aka exists).
+checkForFirstTime(userid);
+
+// Setup what to do with the user information.
+function userFirstTimeCallback(userId, exists) {
+  if (exists) {
+    alert('user ' + userId + ' exists!');
+    // Do something here you want to do for non-firstime users...
+  } else {
+    alert('user ' + userId + ' does not exist!');
+    // Do something here you want to do for first time users (Store data in database?)
+  }
+}
+
+// Tests to see if /users/<userId> exists. 
+function checkForFirstTime(userId) {
+  usersRef.child('users').child(userId).once('value', function(snapshot) {
+    var exists = (snapshot.val() !== null);
+    userFirstTimeCallback(userId, exists);
+  });
+}
+
+
+
+
+
+
 // 1. if the person just click submit without filling out the form he shoulf 
 // 2. he should get 5 recipes of certain ingrediants - should be displayed
 // 3. if anything is filled out, the
@@ -106,5 +154,8 @@ $("#subBtn").click(function () {
             };
 
         })
-})
+});
+
+
+$(".favoriteEmpty").on("click", function)
 
