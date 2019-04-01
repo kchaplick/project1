@@ -54,7 +54,8 @@
                             <!-- <div id="arrow-row" class="row">
                                             <i id="arrow" class="material-icons left">arrow_downward</i>
                                             </div> -->
-                            <p class="grey-text text-darken-2 center-align">Want to save your favorites? <a class="signIn" href="auth.html">Sign-in here</a></p>
+                            <p class="grey-text text-darken-2 center-align">Want to save your favorites? <a
+                                    class="signIn" href="auth.html">Sign-in here</a></p>
                             <div id="sign-out"></div>
                         </div>
                     </div>
@@ -63,32 +64,32 @@
             </main>
 
         </div>
-    
 
-    <!--coin-->
-    <div id="coin-container" class="row">
-        <div id="coin">
-            <div class="eat-in">
-                <p class="question-mark">?</p>
+
+        <!--coin-->
+        <div id="coin-container" class="row">
+            <div id="coin">
+                <div class="eat-in">
+                    <p class="question-mark">?</p>
+                </div>
+                <div class="eat-out">
+
+
+                </div>
             </div>
-            <div class="eat-out">
 
-
-            </div>
         </div>
 
-    </div>
+        <!--flip button-->
+        <div id="flip-button-container" class="row">
+            <a id="flip-button" class="lime waves-effect waves-light btn-large">Flip</a>
 
-    <!--flip button-->
-    <div id="flip-button-container" class="row">
-        <a id="flip-button" class="lime waves-effect waves-light btn-large">Flip</a>
-
-    </div>
+        </div>
 
 
 
 
-    <!--end main container-->
+        <!--end main container-->
     </div>
 
     <!-- Compiled and minified JavaScript -->
@@ -116,13 +117,13 @@
             console.log('provider', providerData)
         }
         // Store user id and name to database;
-        console.log('add user to firebase database')
-        firebase.database().ref('/users/' + uid).set({
-            name: displayName,
-            email: email,
-        }).catch(function (error) {
-            console.log(error)
-        });
+        // console.log('add user to firebase database')
+        // firebase.database().ref('/users/' + uid).set({
+        //     name: displayName,
+        //     email: email,
+        // }).catch(function (error) {
+        //     console.log(error)
+        // });
     });
     document.getElementById("sign-out").addEventListener("click", function () {
         firebase.auth().signOut().then(function () {
