@@ -1,3 +1,13 @@
+// Initalize Firebase 
+var config = {
+  apiKey: "AIzaSyB70faeS2A1Iihc_lXvJqwUEM2X8fU6kfk",
+  authDomain: "test-auth-cdc10.firebaseapp.com",
+  databaseURL: "https://test-auth-cdc10.firebaseio.com",
+  projectId: "test-auth-cdc10",
+  storageBucket: "test-auth-cdc10.appspot.com",
+  messagingSenderId: "242923614816"
+};
+firebase.initializeApp(config);
 
 var database = firebase.database();
 
@@ -59,8 +69,8 @@ $("#subBtn").click(function () {
         var recipeNameTag = $("<h1 class='recName'>").text(recipeName)
         recipeNameContainer.append(recipeNameTag);
         var favoriteIcon = $("<i class='favoriteIcon material-icons lime-text'>favorite_border</i>")
-        favoriteIcon.attr("data-recipeId",recipeId);
-        favoriteIcon.data("recipeId",recipeId);
+        favoriteIcon.attr("data-recipeId", recipeId);
+        favoriteIcon.data("recipeId", recipeId);
         recipeNameContainer.append(favoriteIcon);
         var recipeImageDiv = $(`<div> <img class='image' src='${recipeImage}'> </div>`)
         recipeContainer.append(recipeImageDiv);
@@ -110,7 +120,7 @@ $("#subBtn").click(function () {
 });
 
 
-$(document).on("click", ".favoriteIcon" , function(){
+$(document).on("click", ".favoriteIcon", function () {
   $(this).html("favorite");
   var favoritedRecipe = $(this).data("recipeId")
   console.log("The recipeId is: " + favoritedRecipe);
@@ -119,5 +129,12 @@ $(document).on("click", ".favoriteIcon" , function(){
       let user = user.uid;
       database.ref(`users/${user}/favorites`).set(favoritedRecipe);
     }
+  })
+});
+
+$(document).on("click", ".favoriteIcon", function () {
+  // Getting user from Firebase
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log(user.uid)
   })
 });
