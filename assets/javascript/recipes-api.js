@@ -130,9 +130,9 @@ $(document).on("click", ".favoriteIcon", function () {
   })
 });
 
-$(document).on("click", ".favoriteIcon", function () {
-  // Getting user from Firebase
-  firebase.auth().onAuthStateChanged((user) => {
-    console.log('User ID', user.uid)
-  })
-});
+// $(document).on("click", ".favoriteIcon", function () {
+//   // Getting user from Firebase
+//   firebase.auth().onAuthStateChanged((user) => {
+//     console.log('User ID', user.uid)
+//   })
+// });
