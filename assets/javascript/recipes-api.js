@@ -98,9 +98,6 @@ $("#subBtn").click(function () {
         recipeContainer.append(hr);
 
 
-
-
-
         //gets the recipe steps
         $.get(getRecipeStepsUrl)
           .then(function (results) {
@@ -133,31 +130,24 @@ $(document).on("click", ".favoriteIcon", function () {
 
     // Check recipe already exists in favorites
     console.log(user)
-    database.ref(`/users/${user}/`).once("value", function (snapshot) {
-      console.log(snapshot.val())
-
-      console.log('favs', snapshot.val().favorites)
-      let favs = snapshot.val().favorites;
-
-      if (favs == undefined) {
-        database.ref(`users/${user}/favorites`).push(favoritedRecipe)
-      } else if (favs) {
-        console.log('true')
-        database.ref(`users/${user}/favorites`).push(favoritedRecipe)
+    let favRef = database.ref(`/users/${user}/favorites`)
+    let favArray = [];
+    favRef.once("value", function (snapshot) {
+      snapshot.forEach((childSnapshot) => {
+        let favList = childSnapshot.val();
+        favArray.push(favList);
+      })
+      console.log('favArray', favArray)
+      if (favArray.includes(favoritedRecipe)) {
+        console.log('Favorite recipe already exsits')
       } else {
-        console.log('false')
+        console.log('new favorite add to list - adding to Firebase database')
         database.ref(`users/${user}/favorites`).push(favoritedRecipe)
       }
-
     });
   })
 
 
-
-  // firebase.auth().onAuthStateChanged(function (user) {
-  //   user = user.uid;
-  //   database.ref(`users/${user}/favorites`).push(favoritedRecipe);
-  // })
 });
 
 $(document).on("click", ".favoriteIcon", function () {

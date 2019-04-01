@@ -104,6 +104,8 @@
     let email;
     let uid;
     let providerData;
+    let database = firebase.database();
+
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
@@ -111,27 +113,28 @@
             email = user.email;
             uid = user.uid;
             providerData = user.providerData
-            // let userID = Auth.auth().currentUser!.uid
+
             console.log('user name', displayName)
             console.log('user id', uid)
             console.log('provider', providerData)
         }
-        // Store user id and name to database;
-        // console.log('add user to firebase database')
-        // firebase.database().ref('/users/' + uid).set({
-        //     name: displayName,
-        //     email: email,
-        // }).catch(function (error) {
-        //     console.log(error)
-        // });
 
-        // Store new user name and email to database
-        firebase.database().ref(`/users/${uid}`).update({
-            name: displayName,
-            email: email,
-            favorites: []
+        // Check if user exists in database 
+        let userRef = database.ref();
+        userRef.child('users').child(uid).once('value', function (snapshot) {
+            if ((snapshot.val() !== null)) {
+                console.log('user exists', snapshot.val())
+            } else {
+                console.log('user does not exist')
+                // Create database path for user
+                firebase.database().ref('/users/' + uid).set({
+                    name: displayName,
+                    email: email,
+                }).catch(function (error) {
+                    console.log(error)
+                });
+            }
         });
-
     });
 
 
