@@ -124,7 +124,17 @@
         // }).catch(function (error) {
         //     console.log(error)
         // });
+
+        // Store new user name and email to database
+        firebase.database().ref(`/users/${uid}`).update({
+            name: displayName,
+            email: email,
+            favorites: []
+        });
+
     });
+
+
     document.getElementById("sign-out").addEventListener("click", function () {
         firebase.auth().signOut().then(function () {
             console.log('Sign-out successful')
