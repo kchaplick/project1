@@ -125,14 +125,14 @@ $(document).on("click", ".favoriteIcon", function () {
   var favoritedRecipe = $(this).data("recipeId")
   console.log("The recipeId is: " + favoritedRecipe);
   firebase.auth().onAuthStateChanged(function (user) {
-    let user = user.uid;
+    user = user.uid;
     database.ref(`users/${user}/favorites`).set(favoritedRecipe);
   })
 });
 
-// $(document).on("click", ".favoriteIcon", function () {
-//   // Getting user from Firebase
-//   firebase.auth().onAuthStateChanged((user) => {
-//     console.log('User ID', user.uid)
-//   })
-// });
+$(document).on("click", ".favoriteIcon", function () {
+  // Getting user from Firebase
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log('User ID', user.uid)
+  })
+});
