@@ -1,5 +1,5 @@
 
-var database = firebase.database;
+var database = firebase.database();
 
 // 1. if the person just click submit without filling out the form he shoulf 
 // 2. he should get 5 recipes of certain ingrediants - should be displayed
