@@ -126,7 +126,7 @@ $(document).on("click", ".favoriteIcon", function () {
   console.log("The recipeId is: " + favoritedRecipe);
   firebase.auth().onAuthStateChanged(function (user) {
     user = user.uid;
-    database.ref(`users/${user}/favorites`).set(favoritedRecipe);
+    database.ref(`users/${user}/favorites`).push(favoritedRecipe);
   })
 });
 
@@ -136,3 +136,8 @@ $(document).on("click", ".favoriteIcon", function () {
     console.log('User ID', user.uid)
   })
 });
+
+$("#favoriteLink").on("click",function(){
+
+
+})
