@@ -1,12 +1,12 @@
 // Initalize Firebase 
-var config = {
-  apiKey: "AIzaSyB70faeS2A1Iihc_lXvJqwUEM2X8fU6kfk",
-  authDomain: "test-auth-cdc10.firebaseapp.com",
-  databaseURL: "https://test-auth-cdc10.firebaseio.com",
-  projectId: "test-auth-cdc10",
-  storageBucket: "test-auth-cdc10.appspot.com",
-  messagingSenderId: "242923614816"
-};
+// var config = {
+//   apiKey: "AIzaSyB70faeS2A1Iihc_lXvJqwUEM2X8fU6kfk",
+//   authDomain: "test-auth-cdc10.firebaseapp.com",
+//   databaseURL: "https://test-auth-cdc10.firebaseio.com",
+//   projectId: "test-auth-cdc10",
+//   storageBucket: "test-auth-cdc10.appspot.com",
+//   messagingSenderId: "242923614816"
+// };
 firebase.initializeApp(config);
 
 var database = firebase.database();
