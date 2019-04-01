@@ -125,16 +125,14 @@ $(document).on("click", ".favoriteIcon", function () {
   var favoritedRecipe = $(this).data("recipeId")
   console.log("The recipeId is: " + favoritedRecipe);
   firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      let user = user.uid;
-      database.ref(`users/${user}/favorites`).set(favoritedRecipe);
-    }
+    let user = user.uid;
+    database.ref(`users/${user}/favorites`).set(favoritedRecipe);
   })
 });
 
 $(document).on("click", ".favoriteIcon", function () {
   // Getting user from Firebase
   firebase.auth().onAuthStateChanged((user) => {
-    console.log(user.uid)
+    console.log('User ID', user.uid)
   })
 });
