@@ -138,6 +138,8 @@ $(document).on("click", ".favoriteIcon", function () {
 });
 
 $("#favoriteLink").on("click",function(){
+  database.ref("/users/").on("child_added", function(snapshot) {
+    // Check favorite exits
+    if (snapshot.child("favorites").exists()) {
 
-
-})
+});
