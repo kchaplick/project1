@@ -11,6 +11,7 @@ var config = {
 
 var database = firebase.database();
 
+
 // 1. if the person just click submit without filling out the form he shoulf 
 // 2. he should get 5 recipes of certain ingrediants - should be displayed
 // 3. if anything is filled out, the
@@ -124,24 +125,98 @@ $(document).on("click", ".favoriteIcon", function () {
   $(this).html("favorite");
   var favoritedRecipe = $(this).data("recipeId")
   console.log("The recipeId is: " + favoritedRecipe);
-  firebase.auth().onAuthStateChanged(function (user) {
-    user = user.uid;
-    database.ref(`users/${user}/favorites`).push(favoritedRecipe);
+
+  // Get user id
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log('User ID', user.uid)
+    user = user.uid
+
+    // Check recipe already exists in favorites
+    console.log(user)
+    database.ref(`/users/${user}/`).once("value", function (snapshot) {
+      console.log(snapshot.val())
+
+      console.log('favs', snapshot.val().favorites)
+      let favs = snapshot.val().favorites;
+
+      if (favs == undefined) {
+        database.ref(`users/${user}/favorites`).push(favoritedRecipe)
+      } else if (favs) {
+        console.log('true')
+        database.ref(`users/${user}/favorites`).push(favoritedRecipe)
+      } else {
+        console.log('false')
+        database.ref(`users/${user}/favorites`).push(favoritedRecipe)
+      }
+
+    });
   })
+
+
+
+  // firebase.auth().onAuthStateChanged(function (user) {
+  //   user = user.uid;
+  //   database.ref(`users/${user}/favorites`).push(favoritedRecipe);
+  // })
 });
 
 $(document).on("click", ".favoriteIcon", function () {
   // Getting user from Firebase
-  firebase.auth().onAuthStateChanged((user) => {
-    console.log('User ID', user.uid)
-  })
+  // firebase.auth().onAuthStateChanged((user) => {
+  //   console.log('User ID', user.uid)
+  // })
 });
 
 $("#favoriteLink").on("click", function () {
-  database.ref("/users/").on("child_added", function (snapshot) {
-    // Check favorite exits
-    if (snapshot.child("favorites").exists()) {
+  $("#display-favs").empty();
 
-    };
+  // Scroll to favorite recipes
+  $("html, body").animate({
+    scrollTop: $("#display-favs").offset().top
+  }, 1000);
+
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log('User ID', user.uid)
+    user = user.uid
+
+    let i = 1;
+    database.ref(`/users/${user}/favorites/`).on("value", function (snapshot) {
+      console.log(snapshot.val())
+
+      snapshot.forEach((childSnapshot) => {
+        console.log(childSnapshot.val())
+
+        let favs = childSnapshot.val();
+
+        let favRemove = $("<button>");
+        favRemove.attr("data-fav-recipes", childSnapshot.key);
+        favRemove.addClass("checkbox");
+        favRemove.text("X")
+
+        let favTagText = $("<p>").text(` Favorite: ${favs}`);;
+        $(favTagText).prepend(favRemove)
+        $("#display-favs").append(favTagText);
+        i++
+      })
+    });
   });
 })
+
+// Delete favorite recipe
+$(document).on("click", ".checkbox", function (event) {
+  event.preventDefault();
+  $("#display-favs").empty();
+
+  // Select favorite recipe to remove
+  let deleteFav = $(this).attr("data-fav-recipes")
+  console.log(deleteFav)
+  // Get user id
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log('User ID', user.uid)
+    user = user.uid
+
+    // Remove favorite recipe from Firebase database and update HTML page
+    database.ref(`users/${user}/favorites/${deleteFav}/`).remove();
+  });
+});
+

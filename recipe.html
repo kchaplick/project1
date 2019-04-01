@@ -132,44 +132,43 @@
                 <p id="favoriteLink" class="lime-text accent-2 center-align">Craving a favorite? Click here</p>
             </div>
         </div>
-
     </div>
-
-
 
     <div class="container">
         <div class="row">
-            <div id="recipeResults" class="col s12">
-
-            </div>
+            <div id="recipeResults" class="col s12"></div>
         </div>
+    </div>
 
-        <!-- Compiled and minified JavaScript -->
-       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript" src="assets/javascript/recipes-api.js"></script>
-        <script type="text/javascript" src="assets/javascript/restaurant-api.js"></script>
-        <script>
-            // Firebase user data:
-            // Setting observer
-            firebase.auth().onAuthStateChanged(function (user) {
-                if (user) {
-                    console.log('User is signed in')
-                    console.log('User ID', user.uid)
-                    console.log('User name', user.displayName);
-                    console.log("User email", user.email)
-                    console.log("User provider info", user.providerData)
-                } else {
-                    console.log('No user is signed in')
-                }
-            });
+    <!-- Display Favorites -->
+    <div id="display-favs"></div>
 
-            let user = firebase.auth().currentUser
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/recipes-api.js"></script>
+    <script type="text/javascript" src="assets/javascript/restaurant-api.js"></script>
+    <script>
+        // Firebase user data:
+        // Setting observer
+        firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                console.log('User', user)
+                console.log('User is signed in')
+                console.log('User ID', user.uid)
+                console.log('User name', user.displayName);
+                console.log("User email", user.email)
+                console.log("User provider info", user.providerData)
+            } else {
+                console.log('No user is signed in')
             }
-        </script>
+        });
+
+        let user = firebase.auth().currentUser
+        if (user) {
+            console.log('User', user)
+        }
+    </script>
 
 
 </body>
