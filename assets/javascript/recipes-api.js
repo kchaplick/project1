@@ -114,8 +114,10 @@ $(document).on("click", ".favoriteIcon" , function(){
   $(this).html("favorite");
   var favoritedRecipe = $(this).data("recipeId")
   console.log("The recipeId is: " + favoritedRecipe);
-  database.ref().child(`users/${user.uid}/favorites`).set(favoritedRecipe);
-
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      let user = user.uid;
+      database.ref(`users/${user}/favorites`).set(favoritedRecipe);
+    }
+  })
 });
-
-
