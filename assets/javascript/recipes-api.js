@@ -142,20 +142,19 @@ $(document).on("click", ".favoriteIcon", function () {
         console.log('Favorite recipe already exsits')
       } else {
         console.log('new favorite add to list - adding to Firebase database')
-        database.ref(`users/${user}/favorites`).push(favoritedRecipe)
+        database.ref(`users/${user}/favorites`).push(favoritedRecipe);
+        favArray = [];
       }
     });
   })
-
-
 });
 
-$(document).on("click", ".favoriteIcon", function () {
-  // Getting user from Firebase
-  // firebase.auth().onAuthStateChanged((user) => {
-  //   console.log('User ID', user.uid)
-  // })
-});
+// $(document).on("click", ".favoriteIcon", function () {
+// Getting user from Firebase
+// firebase.auth().onAuthStateChanged((user) => {
+//   console.log('User ID', user.uid)
+// })
+// });
 
 $("#favoriteLink").on("click", function () {
   $("#display-favs").empty();
@@ -169,7 +168,6 @@ $("#favoriteLink").on("click", function () {
     console.log('User ID', user.uid)
     user = user.uid
 
-    let i = 1;
     database.ref(`/users/${user}/favorites/`).on("value", function (snapshot) {
       console.log(snapshot.val())
 
@@ -188,7 +186,6 @@ $("#favoriteLink").on("click", function () {
         favTagText.addClass("favItem");
 
         $("#display-favs").append(favTagText);
-        i++
       })
     });
   });
