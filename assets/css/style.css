@@ -226,3 +226,11 @@ body{
   font-family: 'Caveat Brush', cursive;
   font-size: 45px;
 }
+
+/* Media Queries Below: 400px, `640px` */
+@media screen and (max-width: 400px) {
+  #logoRes{
+    max-width: 70%;
+    height: auto;
+  }
+}

@@ -4,6 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Sample FirebaseUI App</title>
+  <link type="text/css" rel="stylesheet" href="assets/css/popup.css" />
+  <!--Import Google Fonts-->
+
+ <link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Roboto:400,500,700,900" rel="stylesheet">
+ <!-- Compiled and minified CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
   <!-- *******************************************************************************************
        * TODO(DEVELOPER): Paste the initialization snippet from:
        * Firebase Console > Overview > Add Firebase to your web app. *
@@ -100,9 +107,14 @@
 <body>
   <!-- The surrounding HTML is left untouched by FirebaseUI.
          Your app may use that space for branding, controls and other customizations.-->
-  <h1>Sign-up/Log-in Popup Window</h1>
+  <h4 id="subHeader" class="center-align">Create an Account</h4>
+  <p id="pHeader" class="center-align">or Log-In below</p>
+
   <div id="firebaseui-auth-container"></div>
   <div id="loader">Loading...</div>
 </body>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 
 </html>

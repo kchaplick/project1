@@ -181,10 +181,12 @@ $("#favoriteLink").on("click", function () {
         let favRemove = $("<button>");
         favRemove.attr("data-fav-recipes", childSnapshot.key);
         favRemove.addClass("checkbox");
-        favRemove.text("X")
+        favRemove.text("x")
 
         let favTagText = $("<p>").text(` Favorite: ${favs}`);;
         $(favTagText).prepend(favRemove)
+        favTagText.addClass("favItem");
+
         $("#display-favs").append(favTagText);
         i++
       })
