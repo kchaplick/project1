@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div id="ingredInput" class="input-field col s12">
-                <input id="ingredients" type="text" class="validate">
+                <input id="ingredients" type="text" class="validate" autofocus="autofocus">
                 <label for="ingredients">Enter Preferred Ingredients</label>
             </div>
         </div>
@@ -161,8 +161,11 @@
                 console.log('User name', user.displayName);
                 console.log("User email", user.email)
                 console.log("User provider info", user.providerData)
+                $("#favoriteLink").show();
             } else {
                 console.log('No user is signed in')
+                // Hide favorites link
+                $("#favoriteLink").hide();
             }
         });
 

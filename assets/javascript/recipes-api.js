@@ -43,9 +43,6 @@ $("#subBtn").click(function () {
 
   getRecipesUrl = `https://api.yummly.com/v1/api/recipes?_app_id=${apiId}&_app_key=${apiKey}&q=${userIngredient ? userIngredient : randomIngrd}&requirePictures=true&maxTotalTimeInSeconds=${timeInSeconds ? timeInSeconds : 2400}&nutrition.${userDiet ? userDiet : def}.max=20&allowedAllergy[]=${userHealth ? userHealth : defu}&maxResult=5&start=5&sourceRecipeUrl`
 
-
-
-
   // the ajax calls
   $.get(getRecipesUrl)
     .then(function (results) {
@@ -53,6 +50,9 @@ $("#subBtn").click(function () {
       // display 5 recipes
       var recipes = results.matches
       console.log(recipes)
+      // Empty recipe div before displaying list
+      $("#recipeResults").empty();
+
       for (var i = 0; i < recipes.length; i++) {
         var recipeName = recipes[i].recipeName;
         var recipeId = recipes[i].id;
@@ -97,7 +97,6 @@ $("#subBtn").click(function () {
         var hr = $("<div class='divider'></div>")
         recipeContainer.append(hr);
 
-
         //gets the recipe steps
         $.get(getRecipeStepsUrl)
           .then(function (results) {
@@ -111,10 +110,12 @@ $("#subBtn").click(function () {
               }
             }
           });
-
       };
-
     })
+  // Scroll to recipe list
+  $("html, body").animate({
+    scrollTop: $("#recipeResults").offset().top
+  }, 700);
 });
 
 
@@ -167,10 +168,10 @@ $("#favoriteLink").on("click", function () {
   firebase.auth().onAuthStateChanged((user) => {
     console.log('User ID', user.uid)
     user = user.uid
-
+    $("#display-favs").empty();
     database.ref(`/users/${user}/favorites/`).on("value", function (snapshot) {
       console.log(snapshot.val())
-
+      $("#display-favs").empty();
       snapshot.forEach((childSnapshot) => {
         console.log(childSnapshot.val())
 

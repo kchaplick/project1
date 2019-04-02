@@ -23,11 +23,6 @@ function initAutocomplete() {
     document.getElementById('address-input')
   )
 };
-// Check value of price-select
-let priceCheckInput = (priceSelect === null) ? "1" : priceSelect;
-
-// Setup autocomplete
-// Seed Data
 
 // on-click event handler - retrieve input values from restaurant.html page
 $("#sub-btn").on("click", function (event) {
@@ -69,7 +64,7 @@ const zipcodeLatLng = (addressInput) => {
 // Yelp ajax call - retrieve restaurant list/data
 const restaurantList = (lat, lng) => {
   $.ajax({
-    url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${cuisineInput}&latitude=${lat}&longitude=${lng}&sort_by=distance&limit=${restaurantSearchLimit}`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${cuisineInput}&price=${priceSelect}&latitude=${lat}&longitude=${lng}&sort_by=distance&limit=${restaurantSearchLimit}`,
     method: "GET",
     headers: {
       Authorization: `Bearer y_hl6PXci4AHe6XNXNxXwkuPAWbVJaR28iXmlx9rXOQYb4iHKzWhCfCAkvFHzwm2s6RXUmYQwYlmk1ZpllOwOZW3Z2co_8HdphrRJ-p3a9eP0qhRBPzAgOCc3NuXXHYx`,
@@ -156,7 +151,7 @@ const restaurantList = (lat, lng) => {
     })
     console.log(locations)
     initMap();
-    // Scroll to of map
+    // Scroll to map
     $("html, body").animate({
       scrollTop: $("#map").offset().top
     }, 700);
