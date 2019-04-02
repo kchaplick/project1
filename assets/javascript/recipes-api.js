@@ -141,6 +141,8 @@ $(document).on("click", ".favoriteIcon", function () {
       console.log('favArray', favArray)
       if (favArray.includes(favoritedRecipe)) {
         console.log('Favorite recipe already exsits')
+        // Message user know recipe already stored in favorites
+        M.toast({ html: 'Recipe already stored in your favorites' })
       } else {
         console.log('new favorite add to list - adding to Firebase database')
         database.ref(`users/${user}/favorites`).push(favoritedRecipe);
@@ -149,13 +151,6 @@ $(document).on("click", ".favoriteIcon", function () {
     });
   })
 });
-
-// $(document).on("click", ".favoriteIcon", function () {
-// Getting user from Firebase
-// firebase.auth().onAuthStateChanged((user) => {
-//   console.log('User ID', user.uid)
-// })
-// });
 
 $("#favoriteLink").on("click", function () {
   $("#display-favs").empty();
