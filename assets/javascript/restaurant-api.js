@@ -50,11 +50,11 @@ const zipcodeLatLng = (addressInput) => {
     url: `https://maps.googleapis.com/maps/api/geocode/json?address=${addressInput}&key=AIzaSyAh5sBAW8JKo0Fbeu4JPk_dYvN5aEzPW4c`,
     method: "GET"
   }).then(function (response) {
-    console.log(response)
+    // console.log(response)
     addressLat = response.results[0].geometry.location.lat
     addressLng = response.results[0].geometry.location.lng
     // Log lat & lng
-    console.log(addressLat, addressLng)
+    // console.log(addressLat, addressLng)
 
     // Invoke Yelp ajax function
     restaurantList(addressLat, addressLng);
@@ -70,7 +70,7 @@ const restaurantList = (lat, lng) => {
       Authorization: `Bearer y_hl6PXci4AHe6XNXNxXwkuPAWbVJaR28iXmlx9rXOQYb4iHKzWhCfCAkvFHzwm2s6RXUmYQwYlmk1ZpllOwOZW3Z2co_8HdphrRJ-p3a9eP0qhRBPzAgOCc3NuXXHYx`,
     }
   }).then(function (response) {
-    console.log(response)
+    // console.log(response)
     let restResponse = response.businesses;
 
     // Empty Div
@@ -97,7 +97,7 @@ const restaurantList = (lat, lng) => {
         if (match) {
           let intlCode = (match[1] ? '' : '')
           formatPhoneNumber = [intlCode, match[2], '-', match[3], '-', match[4]].join('');
-          console.log(formatPhoneNumber);
+          // console.log(formatPhoneNumber);
         }
         if (!formatPhoneNumber) {
           formatPhoneNumber = "Phone number not available"
@@ -110,12 +110,12 @@ const restaurantList = (lat, lng) => {
       // Push restaurant data to locations array to build map markers
       locations.push([restName, restLat, restLng])
 
-      console.log("Phone number", formatPhoneNumber);
-      if (formatPhoneNumber) {
-        console.log('true')
-      } else {
-        console.log('false')
-      }
+      // console.log("Phone number", formatPhoneNumber);
+      // if (formatPhoneNumber) {
+      //   console.log('true')
+      // } else {
+      //   console.log('false')
+      // }
 
 
       // Build HTML Tags
@@ -167,7 +167,7 @@ function initMap() {
     },
     zoom: 15
   });
-  console.log('google maps first part complete')
+  // console.log('google maps first part complete')
   // Create Google Maps Info Window to display restarant markers
   let infowindow = new google.maps.InfoWindow({});
   let markers = [];
@@ -183,7 +183,7 @@ function initMap() {
 
   // Loop through locations array - add markers to map
   for (i = 0; i < locations.length; i++) {
-    console.log('google marker for-loop')
+    // console.log('google marker for-loop')
     marker = new google.maps.Marker({
       position: new google.maps.LatLng(locations[i][1], locations[i][2]),
       map: map,
