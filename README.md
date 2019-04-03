@@ -4,7 +4,7 @@ The app's mission is No decisions. No guilt. No worries. MealFlip's purpose is:
 - Choose at random whether to eat in or eat out
 - Help users by providing a limited list of options for either
 
-##Technology
+## Technology
 - Materialize CSS library
 - Firebase Authentication
   - used for user login
